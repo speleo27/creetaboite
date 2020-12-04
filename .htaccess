@@ -1,0 +1,26 @@
+
+RewriteEngine on
+
+
+
+
+
+# remove file extensions
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule (.*) $1.php [L]
+
+RedirectMatch 403 ^/upload/([a-zA-Z0-9]+)/$
+
+RewriteRule ^tableau-de-bord$ totoboard.php [L]
+RewriteRule ^creation-de-prospect$ totoform.php [L]
+RewriteRule ^formulaire$ userform.php [L]
+RewriteRule ^accueil$ usercrea.php [L]
+RewriteRule ^conditions-generales-utilisation$ usercgu.php [L]
+RewriteRule ^gestion-des-dossiers$ totodocs.php [L]
+RewriteRule ^mise-a-jour-du-dossier-([a-zA-Z0-9]+)$ totomaj.php?societe_ref_prosp=$1 [L]
+RewriteRule ^ajouter-un-associe$ addassociate.php [L]
+
+# CUSTOM ERROR PAGES
+ErrorDocument 404 /404.php

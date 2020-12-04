@@ -1,0 +1,129 @@
+@import 'plugin/color';
+
+body,html{
+    font-family: $font;
+    width: auto;
+    margin:0px;
+    padding:0px;
+    justify-content: center;
+    background-color: #ececec;
+}
+#btnconnect{
+    background-color: $secondarycolor;
+    color:$primarycolor;
+
+}
+#usernavbar{
+    background-color: $primarycolor;
+    height: 60px;
+}
+
+#logo{
+    width: 250px;
+    margin-left: 30 px;
+    padding: 10px 25px;
+}
+#brand
+{
+    color:$secondarycolor;
+}
+
+section{
+    margin:auto;
+    padding: 30px;
+    background-color: $primarycolor;
+    border-radius: 10px;
+    justify-content: center;
+    width: 90%;
+}
+h2{
+    margin:auto;
+    padding: auto;
+    color: $secondarycolor;
+    
+}
+h3 {
+    margin:auto;
+    padding: auto;
+    color:$secondarycolor;
+   
+}
+#warning{
+    text-align: center;
+}
+#userblock{
+    text-align: center;
+}
+#check{
+    background-color: $primarycolor;
+    border: none;
+}
+p{
+    font-family: $font ;
+    font-size: 16px;
+    color: $secondarycolor;
+
+}
+
+label{
+   padding: 5px ;
+}
+#btnvalid{
+    background-color: $secondarycolor;
+    color:$primarycolor;
+
+
+}
+footer{
+    margin-top: 25px;
+    background-color: $primarycolor;
+    color:$secondarycolor;
+    text-align: center;
+    height: 40px;
+}
+#footer{
+padding: 10px;
+}
+#userp{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+#search{
+    margin: auto;
+    padding-bottom: 10px;
+
+}
+#space{
+  height: 10px;
+}
+#btnupdate{
+ background-color: $primarycolor;
+ color: $secondarycolor;
+}
+
+
+#btnupload{
+margin:auto;
+padding:auto;
+
+    
+}
+#decoModal{
+    color: $tertiarycolor;
+}
+h4{
+    margin:auto;
+    padding: auto;
+    color:$secondarycolor;
+   
+}
+#deleteModal{
+    color: $tertiarycolor;
+}
+#listCusto>tr>td{
+    background-color: $primarycolor;
+}
+h1{
+    color: $secondarycolor;
+}
+

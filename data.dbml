@@ -1,0 +1,142 @@
+Table societe as S {
+  societe_id int [pk, increment]
+  societe_ref_prosp varchar
+  societe_ref_customer varchar
+  societe_name varchar
+  societe_activity tinytext
+  societe_address varchar
+  societe_zip_code int
+  societe_city varchar
+  societe_immat int
+  TVA_number varchar
+  code_ape varchar
+  sign_date date
+  date_end date
+  rcs_city int
+  gerant_id int
+  bank  varchar
+  bank_address varchar
+  iban varchar
+  term date
+  convention varchar
+  ref_local_id int
+  date_entrance date
+  security_deposit int
+  number_action int
+  action_price int
+  capital int
+  number_exemplaires int
+  made_date date //timestamps
+  made_place varchar
+  agency varchar
+  societe_status int  
+  social_denomination varchar
+  commercial_name varchar
+  status_history_id int // status si active ou archive
+}
+
+Table toto as A {//admin
+  toto_id int [pk,increment]
+  toto_name varchar
+  toto_dodo varchar //password prevoir salage
+ }
+
+Table customer as customer {//peronne physique lié a la société
+   customer_id int [pk,increment]
+   customer_civility int 
+   customer_full_name varchar
+   customer_first_name varchar
+   customer_email varchar
+   customer_phone int
+   customer_address varchar
+   customer_zip_code int
+   customer_city int
+   customer_birthday date
+   customer_place_of_birth varchar
+   customer_nationality varchar
+   customer_guizmo varchar //password
+ }
+
+table civility as civ{
+   civility_id int [pk,increment]
+   civility varchar
+ }
+ table status{
+    status_id int [pk,increment]
+    status_type varchar  //prospect, en cour, client
+
+ }
+ table upload as U {
+    upload_id int [pk, increment]
+    societe_id int 
+    upload_ci varchar // CI CS dirigeant
+    upload_just_dom varchar //justificatif de domicile
+    upload_rib varchar //RIB
+    upload_no_cond varchar //attestation de non condamnation
+    upload_attest_found varchar //attestation dépot de fond
+    upload_social_object varchar 
+
+ }
+ table lease_term as LT{
+     lease_term_id int [pk, increment]
+     lease int
+ }
+ table surface_price as SP{
+     surface_price_id int [pk, increment]
+     price int 
+ }
+ table position as POS {//etage
+    position_id int [pk, increment]
+    floor varchar
+ }
+ table associates as asso{//table many to many
+    associate_id  int [pk, increment]
+    customer_id int
+    society_id int 
+
+ }
+ table local as loc{
+    ref_local_id int [pk, increment]
+    ref_int_local varchar
+    supercifie int
+    surface_weighted int
+    position_id int
+    number_park_place int
+    lease_term_id int
+    rent_surface_price_id int
+    mensual_rent_ht int
+    rent_letter varchar
+    prorated_rent int
+    charge varchar
+    property_tax int
+    cumulative_rent int
+ }
+Ref: customer.customer_civility > civ.civility_id 
+Ref: S.gerant_id > customer.customer_id
+Ref: S.societe_status > status.status_id
+Ref: U.societe_id > S.societe_id
+Ref: LT.lease_term_id > S.lease_term_id
+Ref: SP.surface_price_id > S.rent_surface_price_id
+Ref: POS.position_id > S.position_id
+
+
+// --- LEVEL 2 
+/// ---- Table de référence pour les graphiques
+
+table product as Prod{
+   product_id int [pk, increment]
+   societe_ref_customer int 
+   office  int // bool not NULL
+   domiciliation int // bool Not NULL
+   co_working int // bool not NULL 
+   sdr int //bool not NULL
+   prestation int // bool not NULL 
+}
+table preta as PREST{
+   prest_id int [pk, increment]
+   prest_name varchar
+}
+
+Ref: Prod.societe_ref_customer > S.societe_ref_customer
+
+Ref: "societe"."lease_term_id" < "societe"."cumulative_rent

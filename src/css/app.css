@@ -1,0 +1,137 @@
+body, html {
+  font-family: "Open Sans", sans-serif;
+  width: auto;
+  margin: 0px;
+  padding: 0px;
+  justify-content: center;
+  background-color: #ececec;
+}
+
+#btnconnect {
+  background-color: #FFFFFF;
+  color: #759672;
+}
+
+#usernavbar {
+  background-color: #759672;
+  height: 60px;
+}
+
+#logo {
+  width: 250px;
+  margin-left: 30 px;
+  padding: 10px 25px;
+}
+
+#brand {
+  color: #FFFFFF;
+}
+
+section {
+  margin: auto;
+  padding: 30px;
+  background-color: #759672;
+  border-radius: 10px;
+  justify-content: center;
+  width: 90%;
+}
+
+h2 {
+  margin: auto;
+  padding: auto;
+  color: #FFFFFF;
+}
+
+h3 {
+  margin: auto;
+  padding: auto;
+  color: #FFFFFF;
+}
+
+#warning {
+  text-align: center;
+}
+
+#userblock {
+  text-align: center;
+}
+
+#check {
+  background-color: #759672;
+  border: none;
+}
+
+p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+label {
+  padding: 5px;
+}
+
+#btnvalid {
+  background-color: #FFFFFF;
+  color: #759672;
+}
+
+footer {
+  margin-top: 25px;
+  background-color: #759672;
+  color: #FFFFFF;
+  text-align: center;
+  height: 40px;
+}
+
+#footer {
+  padding: 10px;
+}
+
+#userp {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+#search {
+  margin: auto;
+  padding-bottom: 10px;
+}
+
+#space {
+  height: 10px;
+}
+
+#btnupdate {
+  background-color: #759672;
+  color: #FFFFFF;
+}
+
+#btnupload {
+  margin: auto;
+  padding: auto;
+}
+
+#decoModal {
+  color: black;
+}
+
+h4 {
+  margin: auto;
+  padding: auto;
+  color: #FFFFFF;
+}
+
+#deleteModal {
+  color: black;
+}
+
+#listCusto > tr > td {
+  background-color: #759672;
+}
+
+h1 {
+  color: #FFFFFF;
+}
+
+/*# sourceMappingURL=app.css.map */
