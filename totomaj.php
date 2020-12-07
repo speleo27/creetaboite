@@ -99,7 +99,7 @@ $loc = $reqlocal->fetchAll(PDO::FETCH_ASSOC);
                 <div class="modal-body">
                     <div class="row mb-2">
                         <select name="doc_id" class="form-control">
-                            <?php $reqdocedit = $bdd->prepare("SELECT * FROM doc_generate");
+                            <?php $reqdocedit = $bdd->prepare("SELECT * FROM doc_generate WHERE doc_name_generate  IS NOT NULL");
                             $reqdocedit->execute(array());
                             $docedit = $reqdocedit->fetchAll(PDO::FETCH_ASSOC);
                             foreach ($docedit as $doc) :  ?>

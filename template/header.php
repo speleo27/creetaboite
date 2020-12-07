@@ -26,14 +26,15 @@ require_once 'controller/connectbdd.php';
     <link rel="stylesheet" href="src/css/main.css" >
     <link rel="stylesheet" href="src/css/app.css" >
     <link rel="stylesheet" href="src/css/jquery.dataTables.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
   
 
-    <title>Euricréa</title>
+    <title>Cree ta boite</title>
 </head>
 
 <body>
 <nav class="navbar" id="usernavbar">
-    <a class="navbar-brand" href="accueil" id="brand">Euricréa</a>
+    <a class="navbar-brand" href="accueil" id="brand">Crée ta boite</a>
     <?php
     if(isset($_SESSION['auth'])) {
      
@@ -59,7 +60,7 @@ require_once 'controller/connectbdd.php';
 </nav>
 
 
-<p><img src="../img/Logo-Euripole.png" alt="logo euripole" srcset="" id="logo"></p>
+<p><img src="../img/logo_creer_ta_boite2.png" alt="" srcset="" id="logo"></p>
 
 
 <!---- Modal ---->

@@ -4,16 +4,16 @@ body, html {
   margin: 0px;
   padding: 0px;
   justify-content: center;
-  background-color: #ececec;
+  background-color: #FFFFFB;
 }
 
 #btnconnect {
-  background-color: #FFFFFF;
-  color: #759672;
+  background-color: #FFFFFB;
+  color: #0C8384;
 }
 
 #usernavbar {
-  background-color: #759672;
+  background-color: #0C8384;
   height: 60px;
 }
 
@@ -24,13 +24,13 @@ body, html {
 }
 
 #brand {
-  color: #FFFFFF;
+  color: #FFFFFB;
 }
 
 section {
   margin: auto;
   padding: 30px;
-  background-color: #759672;
+  background-color: #0C8384;
   border-radius: 10px;
   justify-content: center;
   width: 90%;
@@ -39,13 +39,13 @@ section {
 h2 {
   margin: auto;
   padding: auto;
-  color: #FFFFFF;
+  color: #FFFFFB;
 }
 
 h3 {
   margin: auto;
   padding: auto;
-  color: #FFFFFF;
+  color: #FFFFFB;
 }
 
 #warning {
@@ -57,14 +57,14 @@ h3 {
 }
 
 #check {
-  background-color: #759672;
+  background-color: #0C8384;
   border: none;
 }
 
 p {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
-  color: #FFFFFF;
+  color: #FFFFFB;
 }
 
 label {
@@ -72,14 +72,14 @@ label {
 }
 
 #btnvalid {
-  background-color: #FFFFFF;
-  color: #759672;
+  background-color: #FFFFFB;
+  color: #0C8384;
 }
 
 footer {
   margin-top: 25px;
-  background-color: #759672;
-  color: #FFFFFF;
+  background-color: #0C8384;
+  color: #FFFFFB;
   text-align: center;
   height: 40px;
 }
@@ -103,8 +103,8 @@ footer {
 }
 
 #btnupdate {
-  background-color: #759672;
-  color: #FFFFFF;
+  background-color: #0C8384;
+  color: #FFFFFB;
 }
 
 #btnupload {
@@ -119,7 +119,7 @@ footer {
 h4 {
   margin: auto;
   padding: auto;
-  color: #FFFFFF;
+  color: #FFFFFB;
 }
 
 #deleteModal {
@@ -127,11 +127,11 @@ h4 {
 }
 
 #listCusto > tr > td {
-  background-color: #759672;
+  background-color: #0C8384;
 }
 
 h1 {
-  color: #FFFFFF;
+  color: #FFFFFB;
 }
 
 /*# sourceMappingURL=app.css.map */

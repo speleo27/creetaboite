@@ -31,26 +31,24 @@ if(isset($_POST)){
 
        $headers[]='MIME-Version:1.0';
        $headers[]='Content-type: text/html; charset=utf-8';
-       $headers[]='From: contact@euripole.fr';
-       $headers[]='Bcc:thierry.hoffmann@euripole.fr';
+       $headers[]='From: ';
+    
          //$to = 'seb10400@orange.fr';
         $to = $email;
      
-     $subject = 'Lien de connexion a votre espace création Euricréa';
+     $subject = 'Lien de connexion a votre espace création ';
      $message = '
      <html>
         <head>
             <meta charset="utf-8">
-            <title>Lien de connexion a votre espace création Euricréa</title>
+            <title>Lien de connexion a votre espace création </title>
         </head>
         <body>
         
-               <p><image src="../img/Logo-Euripolemail.png"></p>
-            
             <div>
 
                 <h2>Bonjour '.ucfirst($data['customer_civility']).' '.ucfirst($data['customer_fullname']).'</h2>
-                <p>Vous recevez ce message car vous souhaitez créer votre entreprise et avez choisi de travailler avec EURIPOLE.</p>
+                <p>Vous recevez ce message car vous souhaitez créer votre entreprise et avez choisi de travailler avec Cree ta boite.</p>
                 <p>Pour commencer l\'aventure vous devez vous assurez d\'avoir en votre possession les documents suivant numérisés (au format PDF,JPG,TIFF):
                                 <ul>
                                     <li>Carte d\'identité, carte de séjour ou passport (recto-verso)</li>
@@ -60,18 +58,11 @@ if(isset($_POST)){
                                     <li>Relevé d\'identité bancaire</li>
                                 </ul>
                 </p>
-                <p>Afin de pouvoir poursuivre vos nous vous invitons a vous connecter a l\'adresse suivante:<a href="http://euricrea.sebastien-rossi-speleo27.fr/begin.php?key='.$linkHash.'"> euripole</a> en vous munissant des informations suivante</p>
+                <p>Afin de pouvoir poursuivre vos nous vous invitons a vous connecter a l\'adresse suivante:<a href="creetaboite/begin.php?key='.$linkHash.'"> Cree ta boite</a> en vous munissant des informations suivante</p>
                   
             </div>
         </body>
-        <footer>
-                    <p>EURIPOLE Business Center
-                    17 Rue de Sancey - ZA des Vauguillettes III - 89100 SENS
-                    Tél. +33.(0)3.86.88.30.61
-                    SIRET 844 641 449 00013     Code NAF/APE 6820B
-                    Courriel : euripole@orange.fr – Site internet : www.euripole.fr
-                    </p>
-        </footer>
+                    
      </html>';
 
 

@@ -53,7 +53,7 @@ $array['link'] = "MTAwLS0kMnkkMTAkUHY3V0FKUy9CNUphNnlPMGZMQ2dHdS5LN00zeU1NemM0S2
                                 <td align="center">'.ucfirst($prospect["customer_fullname"]).' '.ucfirst($prospect["customer_firstname"]).'</td>
                                 <td align="center" >'.$prospect["customer_email"].'</td>
                                 <td align="center" >'.$prospect["customer_phone"].'</td>
-                                <td align="center"><a href="controller/sendmail.php?societe_ref_prosp='.$prospect["societe_ref_prosp"].'" class="btn btn-outline-light">Envoyer Email</a></td>
+                                <td align="center"><a href="controller/vartest.php?societe_ref_prosp='.$prospect["societe_ref_prosp"].'" class="btn btn-outline-light">Envoyer Email</a></td>
                                 <td align="center"><a href="mise-a-jour-du-dossier-'.$prospect["societe_ref_prosp"].'" class="btn btn-primary mx-1" >afficher</a><a data-toggle="modal" data-target="#deleteModal" onclick="recupIdProsp(\''.$prospect['societe_ref_prosp'].'\')" class="btn btn-danger mx-1" >Supprimer</a></td>
                             </tr>
                         ';

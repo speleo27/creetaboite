@@ -1,7 +1,7 @@
 <?php
 require_once  __DIR__.'../../vendor/autoload.php';
 require 'connectbdd.php';
-$logo="../img/Logo-Euripole.png";
+$logo="../img/logo_creer_ta_boite2.png";
 
 
 $reqDomFisc =$bdd->prepare("SELECT * FROM societe INNER JOIN customer ON (societe.societe_ref_prosp = customer.societe_ref_prosp) WHERE societe.domiciliation ='fiscale' AND  (customer.cust_status =1 or  customer.cust_status =2)");
@@ -53,7 +53,7 @@ $mpdf->SetHTMLHeader('<p><img src="'.$logo.'" style="max-width:4.5cm; position:f
 $mpdf->SetHTMLFooter('<table width="100%" style="border-top:2.5px solid #759672">
                             <tr >
                                 <td width="20%" style=" font-size:0.2em;"><barcode size="0.8" code="'.sprintf('%011d',time()).'" type="UPCA"   class="barcode" /></td>
-                                <td width="60%" align="center" style="font-size:0.8em;text-align:center; color:#759672; padding-top: 10px">EURIPOLE Business Center <br>17 Rue  Sancey - ZA des Vauguillettes III - 89100 SENS <br>Tél. +33.(0)3.86.88.30.61 SIRET 844 641 449 000 13 Code NAF/APE 6820B <br>Courriel : euripole@orange.fr – Site internet : www.euripole.fr</td>
+                                <td width="60%" align="center" style="font-size:0.8em;text-align:center; color:#759672; padding-top: 10px">Cree ta boite<br>Courriel : creetaboite@orange.fr – Site internet : www.euripole.fr</td>
                                 <td width="20%" style="text-align: right; font-size:0.8em;">{PAGENO}/{nbpg}</td>
                             </tr>
                       </table>');

@@ -1,275 +1,105 @@
 <?php
-
 require 'connectbdd.php';
-include 'function.php';
+// creation de la requete pour aller chercher les info sur le dirigeant et ses codes de connection
+$reqsendmail = $bdd->prepare('SELECT * FROM customer INNER JOIN connect ON customer.societe_ref_prosp = connect.societe_ref_prosp WHERE customer.societe_ref_prosp=?');
+$reqsendmail->execute(array(
+  $_GET['societe_ref_prosp']
+
+));
+while ($data = $reqsendmail->fetch()) {
+  //var_dump($data);
+  $guizmo = $data['guizmo'];
+  $societe = $data['societe_ref_prosp'];
+  $email = $data['connect_email'];
+  $emailjson = json_encode($email);
+  $id = $data['customer_id'];
+  $linkEmailClair = $id . "--" . $guizmo . "--" . $email . "--" . $societe;
+  $linkHash = base64_encode($linkEmailClair);
+  //var_dump($guizmo);
+  if (isset($_GET)) {
+    $req1 = $bdd->prepare("UPDATE list_url set  link=? WHERE societe_ref_prosp=?");
+    $req1->execute(array($linkHash, $_GET['societe_ref_prosp']));
+
+    $reqUpPass = $bdd->prepare('UPDATE connect SET guizmo= :guizmo WHERE societe_ref_prosp= :societe_ref_prosp');
+    $reqUpPass->execute(array(
+      "guizmo" => password_hash($guizmo, PASSWORD_BCRYPT),
+
+      'societe_ref_prosp' => $_GET['societe_ref_prosp']
+    ));
 
 
-//var_dump($_POST);
-//var_dump($start);
-//var_dump($end);
+    $curl = curl_init();
+    $contentmail = " <html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Lien de connexion a votre espace création </title>
+  </head>
+  <body>
 
-if (isset($_POST['startDate']) && isset($_POST['endDate'])) {
+    <div>
 
-  $start = $_POST['startDate'] . " 00:00:00";
+        <h2>Bonjour " . ucfirst($data['customer_civility']) . " " . ucfirst($data['customer_fullname']) . "</h2>
+        <p>Vous recevez ce message car vous souhaitez créer votre entreprise et avez choisi de travailler avec Cree ta boite.</p>
+        <p>Pour commencer l\'aventure vous devez vous assurez d\'avoir en votre possession les documents suivant numérisés (au format PDF,JPG,TIFF):
+                        <ul>
+                            <li>Carte d\'identité, carte de séjour ou passport (recto-verso)</li>
+                            <li>Attestatiuon de non condamnation</li>
+                            <li>Attestation de dépot de fond</li>
+                            <li>Justificatif de domicile de moins de 3 mois</li>
+                            <li>Relevé d\'identité bancaire</li>
+                        </ul>
+        </p>
+        <p>Afin de pouvoir poursuivre vos nous vous invitons a vous connecter a l\'adresse suivante:<a href='creetaboite/begin.php?key=" . $linkHash . "'> Cree ta boite</a> en vous munissant des informations suivante</p>
+          
+    </div>
+</body>
+            
+</html>";
+    $contentmailjson = json_encode($contentmail);
 
-
-  $end = $_POST['endDate'] . " 00:00:00";
-
-  // req pour calculer le nombre de societe
-  $req = $bdd->prepare("SELECT * FROM societe WHERE societe_crea_date BETWEEN '{$start}' AND '{$end}' order by societe_crea_date DESC");
-  $req->execute();
-  $soc = $req->fetchAll(PDO::FETCH_ASSOC);
-  //req pour l'historique
-  $req1 = $bdd->prepare("SELECT  * FROM history WHERE presta_id IS NOT NULL and date BETWEEN '{$start}' AND '{$end}' ");
-  $req1->execute();
-  $histo = $req1->fetchAll(PDO::FETCH_ASSOC);
-} else {
-  
-  // req pour calculer le nombre de societe
-  $req = $bdd->prepare("SELECT  FROM societe order by societe_crea_date DESC ");
-  $req->execute();
-  $soc = $req->fetchAll(PDO::FETCH_ASSOC);
-  
-  //req pour l'historique
-  $req1 = $bdd->prepare("SELECT  * FROM history WHERE presta_id IS NOT NULL  ");
-  $req1->execute();
-  $histo = $req1->fetchAll(PDO::FETCH_ASSOC);
-}
-var_dump($soc);
-die();
-$graph1=array();
-
-foreach($soc as $creasoc){
-  // déclaration des variables
-
-   $key1=substr($creasoc['societe_crea_date'],0,7);
-   $graph1=array('key1'=>0);
- 
-  $graph1[$key1]=array('nbprosp'=>0);
-  $graph1[$key1]=array('nbactif'=>0);
-  $graph1[$key1]=array('nbarch'=>0);
-  $graph1[$key1]=array('nbcont'=>0);
-
-  // recherche de date dans les cle 
-  if(array_key_exists($key1,$graph1)){
-    //condition si concernant le statut (prospect ...)
-    if($creasoc['status_id']==1){
-      $graph1[$key1]+=1;
-      if(array_key_exists('nbprosp',$graph1)){
-        $graph1[$key1]['nbprosp']+=1;
-      }
-    }
-    elseif($creasoc['status_id']==2){
-      $graph1[$key1]+=1;
-      $graph1[$key1]['nbactif']=array('sas'=>0);
-      $graph1[$key1]['nbactif']=array('sasu'=>0);
-      $graph1[$key1]['nbactif']=array('sarl'=>0);
-      $graph1[$key1]['nbactif']=array('eurl'=>0);
-      if(array_key_exists('nbactif',$graph1)){
-        $graph1[$key1]['nbactif']+=1;
-      }
-      
-      //condition pour la forme juridique
-      if($creasoc['societe_form']=='sas'){
-        if(array_key_exists('sas',$graph1)){
-          $graph1[$key1]['nbactif']['sas']+=1;
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://api.mailjet.com/v3.1/send',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => '{
+    "SandboxMode": false,
+    "Messages": [
+        {
+            "From": {
+                "Email": "sebastien.rossi@gretasudchampagne.com",
+                "Name": "contact@creetaboite.fr"
+            },
+            
+            "To": [
+                {
+                    "Email": "seb10400@orange.fr"
+                    
+                }
+            ],
+           
+            "Subject": "Votre lien de connexion",
+            "TextPart": "Bonjour, vous recevez ce mail car vous souhaitez creer votre ",
+            "HTMLPart": "blablalllll"
+           
         }
-      }
-      elseif($creasoc['societe_form']=='sasu'){
-        if(array_key_exists('sasu',$graph1)){
-          $graph1[$key1]['nbactif']['sasu']+=1;
-        }
-      }
-      elseif($creasoc['societe_form']=='sarl'){
-        if(array_key_exists('sarl',$graph1)){
-          $graph1[$key1]['nbactif']['sarl']+=1;
+    ]
+    }',
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json',
+        'Authorization: Basic ZWU4N2VjOWMwNjU1ZDE3ZjZlZTRiZWZmZGIyMTgzMWY6ZmIzNTc3OWZmMzhhZDBhOThiNWVjOWE3Njg3NzNmOWM='
+      ),
+    ));
 
-        }
-       
-      }
-      elseif($creasoc['societe_form']=='eurl'){
-        if(array_key_exists('eurl',$graph1)){
-          $graph1[$key1]['nbactif']['eurl']+=1;
-        }
-      }
-    }
-    elseif($creasoc['status_id']==3){
-      $graph1[$key1]+=1;
-      if(array_key_exists('nbarch',$graph1)){
-        $graph1[$key1]['nbarch']+=1;
-      }
-     
-    }
-    elseif($creasoc['status_id']==4){
-      $graph1[$key1]+=1;
-      if(array_key_exists('nbcont',$graph1)){
-        $graph1[$key1]['nbcont']+=1;
-      }
-    }
+    $response = curl_exec($curl);
     
-  }else{
-   $graph1[$key1]=1;
-
+    var_dump(curl_error($curl));
+    var_dump($response);
+    curl_close($curl);
+    //header('Location:../gestion-des-dossiers');
   }
 }
-var_dump($graph1);
-
-
-
-//var_dump($soc);
-//die();
-
-// remonter chiffre pour les societes
-$nbtotSoc = array_sum($graph1);
-
-
-$nbtotalpresta = count($histo);
-//echo 'nombre total de societe:' .$nbtotSoc;
-//hr();
-// $socarray=array();
-// $month = 12;
-// $nbprosp = 0;
-// $nbactif = 0;
-// $nbarch = 0;
-// $nbcont = 0;
-// $dayDay = explode("-",date("Y-m"));
-// foreach($soc as $socs){
-//   $date=explode("-",$socs['societe_crea_date']);
- 
-//   for ($i = 0; $i<$month; $i++) {
-    
-      
-//       if ($stat['status_id'] == '1') {
-//         $nbprosp += 1;
-//       }
-//       $socarray[$i]['nbprosp']=$nbprosp;
-//       if ($stat['status_id'] == '2') {
-//         $nbactif += 1;
-//       }
-//       $socarray[$i]['nbactif']=$nbactif;
-//       if ($stat['status_id'] == '3') {
-//         $nbarch += 1;
-//       }
-//       $socarray[$i]['nbarch']=$nbarch;
-//       if ($stat['status_id'] == '4') {
-//         $nbcont += 1;
-//       }
-//       $socarray[$i]['nbcont']=$nbcont;
-      
-    
-    
-//   }
-// }
-// var_dump($date);
-// var_dump($dayDay);
-// var_dump($socarray);
-
-// //var_dump($histo);
-// //var_dump($nbtotal);
-// //die();
-// $etude = 0;
-// $buis = 0;
-// $crea = 0;
-// $compt = 0;
-// $brand = 0;
-// $site = 0;
-// $mark = 0;
-// $repub = 0;
-// $vid = 0;
-// $res = 0;
-// $fab = 0;
-// $depmark = 0;
-// $bur = 0;
-
-// foreach ($histo as $hist) {
-
-//   if ($hist['presta_id'] == '1') {
-//     $etude += 1;
-//   }
-//   if ($hist['presta_id'] == '2') {
-//     $buis += 1;
-//   }
-//   if ($hist['presta_id'] == '3') {
-//     $crea += 1;
-//   }
-//   if ($hist['presta_id'] == '4') {
-//     $compt += 1;
-//   }
-//   if ($hist['presta_id'] == '5') {
-//     $brand += 1;
-//   }
-//   if ($hist['presta_id'] == '6') {
-//     $site += 1;
-//   }
-//   if ($hist['presta_id'] == '7') {
-//     $mark += 1;
-//   }
-//   if ($hist['presta_id'] == '8') {
-//     $repub += 1;
-//   }
-//   if ($hist['presta_id'] == '9') {
-//     $vid += 1;
-//   }
-//   if ($hist['presta_id'] == '10') {
-//     $res += 1;
-//   }
-//   if ($hist['presta_id'] == '11') {
-//     $fab += 1;
-//   }
-//   if ($hist['presta_id'] == '12') {
-//     $depmark += 1;
-//   }
-//   if ($hist['presta_id'] == '13') {
-//     $bur += 1;
-//   }
-// }
-
-// $eurl = 0;
-// $sarl = 0;
-// $sas = 0;
-// $sasu = 0;
-
-// foreach ($soc as $data) {
-//   if ($data['societe_form'] == "eurl") {
-//     $eurl += 1;
-//   }
-//   if ($data['societe_form'] == "sarl") {
-//     $sarl += 1;
-//   }
-//   if ($data['societe_form'] == "sas") {
-//     $sas += 1;
-//   }
-//   if ($data['societe_form'] == "sasu") {
-//     $sasu += 1;
-//   }
-// }
-// $globalArray = array(
-//   'nbtotSoc' => $nbtotSoc,
-//   'nbtotalpresta' => $nbtotalpresta,
-//   'nbprosp' => $nbprosp,
-//   'nbactif' => $nbactif,
-//   'nbarch' => $nbarch,
-//   'nbcont' => $nbcont,
-//   'etude' => $etude,
-//   'buis' => $buis,
-//   'crea' => $crea,
-//   'compt' => $compt,
-//   'brand' => $brand,
-//   'site' => $site,
-//   'mark' => $mark,
-//   'repub' => $repub,
-//   'vid' => $vid,
-//   'res' => $res,
-//   'fab' => $fab,
-//   'depmark' => $depmark,
-//   'bur' => $bur,
-//   'eurl' => $eurl,
-//   'sarl' => $sarl,
-//   'sas' => $sas,
-//   'sasu' => $sasu,
-// );
-
-// //var_dump($globalArray);
-
-// $response = json_encode($globalArray);
-// echo $response;

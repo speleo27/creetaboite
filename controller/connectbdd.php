@@ -1,7 +1,7 @@
 
 <?php
 $host = "localhost";
-$dbname = "euricrea";
+$dbname = "creetaboite";
 $user = "root";
 $password = "";
 try {
