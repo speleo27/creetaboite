@@ -10,11 +10,11 @@ include 'controller/function.php';
 
 setlocale(LC_ALL, "fr_FR.utf-8");
 //var_dump($_GET);
-$reqmaj = $bdd->prepare('SELECT * FROM societe INNER JOIN customer ON (societe.societe_ref_prosp = customer.societe_ref_prosp) LEFT JOIN status ON ( societe.status_id = status.status_id) LEFT JOIN associates ON (customer.customer_id = associates.customer_id) LEFT JOIN local ON( societe.ref_int_local = local.ref_int_local) LEFT JOIN lease_term ON (lease_term.lease_term_id = societe.lease_term_id)   WHERE societe.societe_ref_prosp= ?  ');
+$reqmaj = $bdd->prepare('SELECT * FROM societe INNER JOIN customer ON (societe.societe_ref_prosp = customer.societe_ref_prosp) LEFT JOIN associates ON (customer.customer_id = associates.customer_id)     WHERE societe.societe_ref_prosp= ?  ');
 $reqmaj->execute(array($_GET['societe_ref_prosp']));
 $dataMaj = $reqmaj->fetchAll(PDO::FETCH_ASSOC);
-// var_dump($dataMaj);
-// die();
+//var_dump($dataMaj);
+ //die();
 $reqhisto = $bdd->prepare("SELECT * FROM history INNER JOIN societe ON (societe.societe_ref_prosp = history.societe_ref_prosp) LEFT JOIN presta ON ( presta.prest_id = history.presta_id ) WHERE societe.societe_ref_prosp= ? ");
 $reqhisto->execute(array($_GET['societe_ref_prosp']));
 $datahisto = $reqhisto->fetchAll();
@@ -22,12 +22,6 @@ $datahisto = $reqhisto->fetchAll();
 // die();
 //var_dump($_GET);
 //var_dump($dataMaj);
-$reqlocal = $bdd->prepare("SELECT ref_int_local FROM local");
-$reqlocal->execute(array());
-$loc = $reqlocal->fetchAll(PDO::FETCH_ASSOC);
-//var_dump($loc);
-//die();
-
 
 ?>
 <!--  identification de la société MAJ du N° client et du status -->
@@ -600,186 +594,10 @@ $loc = $reqlocal->fetchAll(PDO::FETCH_ASSOC);
         </form>
     </div>
 </section>
-<!-- gestion des locaux  -->
-<section class="mb-4 d-flex justify-content-around">
-    <div class="container">
-        <h3 class="h3 text-center">Gestion des locaux</h3>
-        <h4 class="text-danger text-center"><?= $dataMaj[0]['ref_int_local'] ?></h4>
-        <form action="controller/ctrlmajdoc.php" method="post">
-            <input type="hidden" name="societe_ref_prosp" value="<?= $_GET['societe_ref_prosp'] ?>">
-            <!-- <div class="form-group text-center col-6">
-                <div class="form-inline">
-                    <label for="term">Bail:</label>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="term" id="term1" value="oui" >
-                        <label class="form-check-label" for="term">OUI</label>
-                    </div>
-                    <div class="form-check form-check-inline ">
-                        <input class="form-check-input" type="radio" name="term" id="term2" value="non"checked>
-                        <label class="form-check-label" for="">NON</label>
-                    </div>
-                </div>   
-            </div> -->
-            <div class="" id="localform">
-                <div class="form-group text-center col-6">
-                    <label for="lease_term">Durée du Bail:</label>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="lease_term_id" value="1" <?= $dataMaj[0]['lease'] == '12' ? 'checked' : ''  ?>>
-                        <label class="form-check-label" for="lease_term">12 mois</label>
-                    </div>
-                    <div class="form-check form-check-inline ">
-                        <input class="form-check-input" type="radio" name="lease_term_id" value="2" <?= $dataMaj[0]['lease'] == '24' ? 'checked' : ''  ?>>
-                        <label class="form-check-label" for="lease_term"> 24 mois</label>
-                    </div>
-                    <div class="form-check form-check-inline ">
-                        <input class="form-check-input" type="radio" name="lease_term_id" value="3" <?= $dataMaj[0]['lease'] == '9' ? 'checked' : ''  ?>>
-                        <label class="form-check-label" for="lease_term">3/6/9</label>
-                    </div>
-                </div>
-                <div class="form-row d-flex justify-content-start">
-                    <div class="form-group mr-2">
-                        <label for="ref_local">Référence du local :</label>
-                        <select class="form-control" name="ref_int_local" id="locaRef">
-                            <option value="<?= $dataMaj[0]['ref_int_local'] ?>"><?= $dataMaj[0]['ref_int_local'] ?></option>
-                            <?php foreach ($loc as $loc) :; ?>
-                                <option class="form-control" value="<?= $loc['ref_int_local'] ?>"><?= $loc['ref_int_local'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                    <button type="submit" class='btn btn-block btn-outline-light mb-2' name="update8">Mettre à jour</button>
-            </div>
-        </form>
-                   
-        <?php
-            if ($dataMaj[0]['ref_int_local'] != NULL)
-            {
-                echo '
-                <form action="controller/ctrlmajdoc.php" method="post"> 
-                <input type="hidden" name="societe_ref_prosp" value="'.$_GET['societe_ref_prosp'].'">
-                <input type="hidden" name="ref_int_local" value="'.$dataMaj[0]['ref_int_local'].'">
 
-                    <div>
-                        <div>    
-                            <div class="form-row">
-                                <div class="form-group mr-2">
-                                    <label for="">Dépot de garantie :</label>
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" name="security_deposit" id="security_deposit" value="' . $dataMaj[0]['security_deposit'] . ' ">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">€</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group mr-2">
-                                    <label for="">Date d\'entrée:</label>
-                                    <input class="form-control" type="date" name="date_entrance" id="date_entrance" value="' . $dataMaj[0]['date_entrance'] . '">
-                                </div>
-                                <div class="form-group mr-2">
-                                    <label for="">Date de fin de bail :</label>
-                                    <input class="form-control" type="date" name="date_end" id="date_end" value="' . $dataMaj[0]['date_end'] . '">
-                                </div>
-                            </div>
-                            <div class="form-group mr-2 ">
-                                <label for="superficie">Superficie du local :</label>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" name="superficie" id="superficie" value="' . $dataMaj[0]['supercifie'] . '">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">m²</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mr-2 ">
-                                <label for="surface_weighted">Surface pondérée :</label>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" name="surface_weighted" id="surface_weighted" value="' . $dataMaj[0]['surface_weighted'] . '">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">m²</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mr-2 ">
-                                <label for="position_id">Situation (étage) :</label>
-                                <input class="form-control" type="text" name="position_id" id="position_id" value="' . $dataMaj[0]['position_id'] . '">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group mr-2">
-                                <label for="number_park_place">Nombre de place de parking :</label>
-                                <input class="form-control" type="text" name="number_park_place" id="number_park_place" value="' . $dataMaj[0]['number_park_place'] . '">
-                            </div>
-                        </div>
-                        <div class="form-row ">
-                            <div class="form-group mr-2 ">
-                                <label for="rent_surface_price">Loyer/m² :</label>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" name="rent_surface_price" id="rent_surface_price" value="' . $dataMaj[0]['rent_surface_price_m'] . '">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">€</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mr-2">
-                                <label for="mensual_rent_ht">Loyer mensuel HT:</label>
-                                <div class="input-group">
-                                    <input class="form-control" type="textr" name="mensual_rent_ht" id="mensual_rent_ht" value="' . $dataMaj[0]['mensual_rent_ht'] . '">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">€</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group mr-2 ">
-                            <label for="rent_letter">Loyer mensuel en lettre:</label>
-                            <input class="form-control" type="text" name="rent_letter" id="rent_letter" value="' . $dataMaj[0]['rent_letter'] . '">
-                        </div>
-                        <div class="form-row d-flex">
-                            <div class="form-group mr-2">
-                                <label for="prorated_rent">Prorata de loyer :</label>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" name="prorated_rent" id="prorated_rent" value="' . $dataMaj[0]['prorated_rent'] . '">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">€</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mr-2 ">
-                                <label for="charge">Charge :</label>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" name="charge" id="charge" value="' . $dataMaj[0]['charge'] . '">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">€</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mr-2 ">
-                                <label for="property_tax">Taxe foncière :</label>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" name="property_tax" id="property_tax" value="' . $dataMaj[0]['property_tax'] . '">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">€</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mr-2">
-                                <label for="cumulative_rent">cumul de loyer :</label>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" name="cumulative_rent" id="cumulative_rent" value="' . $dataMaj[0]['cumulative_rent'] . '">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">€</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                        <button class="btn btn-block btn-outline-light " type="submit" name="update9">Mettre à jour</button>
-                </form>';
-            } 
-        ?>
-    </div>
-</section>
 
-<!-- gestion des prestation vendues -->
+
+
 
 
 <script>

@@ -13,7 +13,7 @@ RewriteRule (.*) $1.php [L]
 
 RedirectMatch 403 ^/upload/([a-zA-Z0-9]+)/$
 
-RewriteRule ^tableau-de-bord$ totoboard.php [L]
+RewriteRule ^tableau-de-bord$ dashboard.php [L]
 RewriteRule ^creation-de-prospect$ totoform.php [L]
 RewriteRule ^formulaire$ userform.php [L]
 RewriteRule ^accueil$ usercrea.php [L]

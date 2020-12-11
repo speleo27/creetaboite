@@ -17,9 +17,17 @@ body,html{
     background-color: $primarycolor;
     height: 60px;
 }
+#usernavbarback{
+    margin-left: -200px;
+    background-color: $primarycolor;
+    
+}
+#usernavbarback>ul>li{
+    list-style: none;
 
+}
 #logo{
-    width: 250px;
+    width:15%;
     margin-left: 30 px;
     padding: 10px 25px;
 }
@@ -121,7 +129,7 @@ h4{
     color: $tertiarycolor;
 }
 #listCusto>tr>td{
-    background-color: $primarycolor;
+    background-color: $secondarycolor;
 }
 h1{
     color: $secondarycolor;

@@ -50,7 +50,7 @@ if(isset($_POST['connectbtn']))
                 if($_SESSION['auth']['admin'] ==  1 )
                 {
                    // echo 'connecter en admin';
-                    header('Location:../tableau-de-bord');
+                    header('Location:../dashboard.php');
 
                 }
                 else
