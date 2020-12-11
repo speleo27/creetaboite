@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '1b0dba7cadedef70bec3f9626446d8095882b7ff',
+    'reference' => '1562e9e4aebabf3a0b111e08d087718c09b6cb6c',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '1b0dba7cadedef70bec3f9626446d8095882b7ff',
+      'reference' => '1562e9e4aebabf3a0b111e08d087718c09b6cb6c',
     ),
     'guzzlehttp/guzzle' => 
     array (
@@ -58,12 +58,12 @@
     ),
     'mpdf/mpdf' => 
     array (
-      'pretty_version' => 'v8.0.7',
-      'version' => '8.0.7.0',
+      'pretty_version' => 'v8.0.8',
+      'version' => '8.0.8.0',
       'aliases' => 
       array (
       ),
-      'reference' => '7daf07f15334ed59a276bd52131dcca48794cdbd',
+      'reference' => '4ce221329d0918146514605db1644b2771c5e308',
     ),
     'myclabs/deep-copy' => 
     array (

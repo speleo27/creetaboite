@@ -57,49 +57,28 @@ while ($data = $reqsendmail->fetch()) {
 </html>";
     $contentmailjson = json_encode($contentmail);
 
+    $curl = curl_init();
+
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://api.mailjet.com/v3.1/send',
+      CURLOPT_URL => "https://api.mailjet.com/v3.1/send",
       CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => '',
+      CURLOPT_ENCODING => "",
       CURLOPT_MAXREDIRS => 10,
       CURLOPT_TIMEOUT => 0,
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-      CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS => '{
-    "SandboxMode": false,
-    "Messages": [
-        {
-            "From": {
-                "Email": "sebastien.rossi@gretasudchampagne.com",
-                "Name": "contact@creetaboite.fr"
-            },
-            
-            "To": [
-                {
-                    "Email": "seb10400@orange.fr"
-                    
-                }
-            ],
-           
-            "Subject": "Votre lien de connexion",
-            "TextPart": "Bonjour, vous recevez ce mail car vous souhaitez creer votre ",
-            "HTMLPart": "blablalllll"
-           
-        }
-    ]
-    }',
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_POSTFIELDS => "{\n    \"SandboxMode\": false,\n    \"Messages\": [\n        {\n            \"From\": {\n                \"Email\": \"sebastien.rossi@gretasudchampagne.com\"\n           \n            },\n            \n            \"To\": [\n                {\n                    \"Email\": \"seb10400@orange.fr\"\n                   \n                }\n            ],\n          \n            \"Subject\": \"test\",\n           \n            \"HTMLPart\": \"\",\n           \n            \n            \n          \n            \"Priority\": 2\n            \n        }\n    ]\n}",
       CURLOPT_HTTPHEADER => array(
-        'Content-Type: application/json',
-        'Authorization: Basic ZWU4N2VjOWMwNjU1ZDE3ZjZlZTRiZWZmZGIyMTgzMWY6ZmIzNTc3OWZmMzhhZDBhOThiNWVjOWE3Njg3NzNmOWM='
+        "Content-Type: application/json",
+        "Authorization: Basic ZWU4N2VjOWMwNjU1ZDE3ZjZlZTRiZWZmZGIyMTgzMWY6ZmIzNTc3OWZmMzhhZDBhOThiNWVjOWE3Njg3NzNmOWM="
       ),
     ));
 
     $response = curl_exec($curl);
-    
-    var_dump(curl_error($curl));
-    var_dump($response);
+
     curl_close($curl);
+    var_dump($response);
     //header('Location:../gestion-des-dossiers');
   }
 }

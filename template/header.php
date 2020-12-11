@@ -33,7 +33,7 @@ require_once 'controller/connectbdd.php';
 </head>
 
 <body>
-<nav class="navbar" id="usernavbar">
+<nav class="navbar " id="usernavbar">
     <a class="navbar-brand" href="accueil" id="brand">Crée ta boite</a>
     <?php
     if(isset($_SESSION['auth'])) {
@@ -53,14 +53,11 @@ require_once 'controller/connectbdd.php';
             }
            } else { ?>  
                    <a class="btn btn-outline-light my-2 my-sm-0"  data-toggle='modal' data-target='#connectModal' >Connexion</a>
-                   <?php } ?>  
-        
-     
-               
+                   <?php } ?>          
 </nav>
 
 
-<p><img src="../img/logo_creer_ta_boite2.png" alt="" srcset="" id="logo"></p>
+<p><img src="./img/logo_creer_ta_boite2.svg" alt="" srcset="" id="logo"></p>
 
 
 <!---- Modal ---->

@@ -543,7 +543,7 @@ class OtlDump
 				$c = $psName[$i];
 				$oc = ord($c);
 				if ($oc > 126 || strpos(' [](){}<>/%', $c) !== false) {
-					throw new \Mpdf\Exception\FontException("psName=" . $psName . " contains invalid character " . $c . " ie U+" . ord(c));
+					throw new \Mpdf\Exception\FontException("psName=" . $psName . " contains invalid character " . $c . " ie U+" . ord($c));
 				}
 			}
 		}
@@ -2027,7 +2027,7 @@ $MarkAttachmentType = ' . var_export($this->MarkAttachmentType, true) . ';
 						if ($level == 2 && $exL) {
 							$html .= $exL;
 						}
-						$html .= '&nbsp; }}} }}} &nbsp;';
+						$html .= '&nbsp; &raquo; &raquo; &nbsp;';
 						if ($level == 2 && $exB) {
 							$html .= $exB;
 						}
@@ -2057,7 +2057,7 @@ $MarkAttachmentType = ' . var_export($this->MarkAttachmentType, true) . ';
 							if ($level == 2 && $exL) {
 								$html .= $exL;
 							}
-							$html .= '&nbsp; }}} }}} &nbsp;';
+							$html .= '&nbsp; &raquo; &raquo; &nbsp;';
 							if ($level == 2 && $exB) {
 								$html .= $exB;
 							}
@@ -2087,7 +2087,7 @@ $MarkAttachmentType = ' . var_export($this->MarkAttachmentType, true) . ';
 								if ($level == 2 && $exL) {
 									$html .= $exL;
 								}
-								$html .= '&nbsp; }}} }}} &nbsp;';
+								$html .= '&nbsp; &raquo; &raquo; &nbsp;';
 								if ($level == 2 && $exB) {
 									$html .= $exB;
 								}
@@ -2125,7 +2125,7 @@ $MarkAttachmentType = ' . var_export($this->MarkAttachmentType, true) . ';
 									if ($level == 2 && $exL) {
 										$html .= $exL;
 									}
-									$html .= '&nbsp; }}} }}} &nbsp;';
+									$html .= '&nbsp; &raquo; &raquo; &nbsp;';
 									if ($level == 2 && $exB) {
 										$html .= $exB;
 									}
@@ -3286,7 +3286,7 @@ $MarkAttachmentType = ' . var_export($this->MarkAttachmentType, true) . ';
 							if ($level == 2 && $exL) {
 								$html .= $exL;
 							}
-							$html .= '&nbsp; }}} }}} &nbsp;';
+							$html .= '&nbsp; &raquo; &raquo; &nbsp;';
 							if ($level == 2 && $exB) {
 								$html .= $exB;
 							}
@@ -3338,7 +3338,7 @@ $MarkAttachmentType = ' . var_export($this->MarkAttachmentType, true) . ';
 								if ($level == 2 && $exL) {
 									$html .= $exL;
 								}
-								$html .= '&nbsp; }}} }}} &nbsp;';
+								$html .= '&nbsp; &raquo; &raquo; &nbsp;';
 								if ($level == 2 && $exB) {
 									$html .= $exB;
 								}
@@ -3422,7 +3422,7 @@ $MarkAttachmentType = ' . var_export($this->MarkAttachmentType, true) . ';
 									  if ($level==2 && $exB) { $html .= $exB; }
 									  $html .= '<span class="unchanged">&nbsp;'.$this->formatEntity($glyphs[$p]).$this->formatEntity($SecondGlyph).'</span>';
 									  if ($level==2 && $exL) { $html .= $exL; }
-									  $html .= '&nbsp; }}} }}} &nbsp;';
+									  $html .= '&nbsp; &raquo; &raquo; &nbsp;';
 									  if ($level==2 && $exB) { $html .= $exB; }
 									  $html .= '<span class="changed" style="font-feature-settings:\''.$tag.'\' 1;">&nbsp;'.$this->formatEntity($glyphs[$p]).$this->formatEntity($SecondGlyph).'</span>';
 									  if ($level==2 && $exL) { $html .= $exL; }
@@ -3497,7 +3497,7 @@ $MarkAttachmentType = ' . var_export($this->MarkAttachmentType, true) . ';
 												if ($level == 2 && $exL) {
 													$html .= $exL;
 												}
-												$html .= '&nbsp; }}} }}} &nbsp;';
+												$html .= '&nbsp; &raquo; &raquo; &nbsp;';
 												if ($level == 2 && $exB) {
 													$html .= $exB;
 												}
