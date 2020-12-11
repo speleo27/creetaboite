@@ -1,7 +1,12 @@
 {
+    "name": "sevse/creetaboite",
+    "authors": [
+        {
+            "name": "speleo27",
+            "email": "seb10400@orange.fr"
+        }
+    ],
     "require": {
-        "mpdf/mpdf": "^8.0",
-        "spipu/html2pdf": "^5.2",
-        "mailjet/mailjet-apiv3-php": "^1.5"
+        "mpdf/mpdf": "^8.0"
     }
 }

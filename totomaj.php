@@ -26,50 +26,64 @@ $datahisto = $reqhisto->fetchAll();
 ?>
 <!--  identification de la société MAJ du N° client et du status -->
 <section class='mb-4'>
-    <div class="container">
-        <h2 class="h2 text-center">Mettre a jour le client</h2>
-        <!--ici identification pour par numéro   -->
-        <h3 class="h3 text-center">
-            <?= ($dataMaj['0']['societe_ref_customer'] != NULL ? $dataMaj['0']['societe_ref_customer'] . " " . $dataMaj['0']['societe_name']: $dataMaj['0']['societe_ref_cont'] != null)? $dataMaj['0']['societe_ref_cont'] . " " . $dataMaj['0']['societe_name']:$_GET['societe_ref_prosp'] . " " . $dataMaj['0']['societe_name'];
-             ?></h3>
-        <h3 class="text-danger text-center mb-2"><?= strtoupper($dataMaj['0']['status_type']) ?></h3>
-        <form action="controller/ctrlmajdoc.php" method="post">
-            <input type="hidden" name="societe_ref_prosp" value="<?= $_GET['societe_ref_prosp'] ?>">
-            <div class="form-row d-flex">
-                <div class="form-group ">
-                    <label for="societe_ref_customer">Référence client :</label>
-                    <input class="form-control-sm" type="text" name="societe_ref_customer" id="societe_ref_customer_update" value="<?= $dataMaj['0']['societe_ref_customer'] ?>">
+    
+    <h2 class="h2 text-center">Dossier créateur</h2>
+</section>
+<section class="mb-4">    
+    <!--ici identification pour par numéro   -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-sm-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">   
+                        <h3 class="h3 text-center"style="color:#0C8384">
+                            <?= ($dataMaj['0']['societe_ref_customer'] != NULL ? $dataMaj['0']['societe_ref_customer'] . " " . $dataMaj['0']['societe_name']: $dataMaj['0']['societe_ref_cont'] != null)? $dataMaj['0']['societe_ref_cont'] . " " . $dataMaj['0']['societe_name']:$_GET['societe_ref_prosp'] . " " . $dataMaj['0']['societe_name'];
+                            ?></h3>
+                        <h3 class="text-danger text-center mb-2"><?= strtoupper($dataMaj['0']['status_type']) ?></h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="controller/ctrlmajdoc.php" method="post">
+                            <input type="hidden" name="societe_ref_prosp" value="<?= $_GET['societe_ref_prosp'] ?>">
+                            <div class="form-row d-flex">
+                                <div class="form-group ">
+                                    <label for="societe_ref_customer">Référence client :</label>
+                                    <input class="form-control-sm" type="text" name="societe_ref_customer" id="societe_ref_customer_update" value="<?= $dataMaj['0']['societe_ref_customer'] ?>">
+                                </div>
+                                <div class="form-group ">
+                                    <label for="societe_ref_contentieux">Référence contentieux :</label>
+                                    <input class="form-control-sm" type="text" name="societe_ref_cont" id="societe_ref_cont_update" value="<?= $dataMaj['0']['societe_ref_cont'] ?>">
+                                </div>
+                                <button class="btn btn-outline-light btn-block mb-2" style="background-color:#13a8d9" type="submit" name="update10">Mettre à jour</button>
+                            </div>
+                        </form>
+
+                        <form action="controller/ctrlmajdoc.php" method="post">
+                            <input type="hidden" name="societe_ref_prosp" value="<?= $_GET['societe_ref_prosp'] ?>">
+                            <div class="form-row">
+                                <div class="form-group mb-2">
+                                    <label for="">Date de signature prévu des satuts : </label>
+                                    <input type="date" class="form-control" name="sign_date" >
+                                </div>
+                                <button class="btn btn-outline-light btn-block mb-2"style="background-color:#13a8d9" type="submit" name="update11">Mettre à jour</button>
+                            </div>
+                        </form>
+                        <form action="controller/ctrlmajdoc.php" method="post">
+                            <input type="hidden" name="societe_ref_prosp" value="<?= $_GET['societe_ref_prosp'] ?>">
+                            <div class="input-group mb-2">
+                                <select class="custom-select" id="inputGroupSelect02" name="status_id">
+                                    <option selected>Selectionner un status</option>
+                                    <option value="1">Prospet</option>
+                                    <option value="2">Actif</option>
+                                    <option value="3">Archivé</option>
+                                    <option value="4">en contentieux</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-block btn-outline-light"style="background-color:#13a8d9" type="submit" name="update1">Mettre à jour</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group ">
-                    <label for="societe_ref_contentieux">Référence contentieux :</label>
-                    <input class="form-control-sm" type="text" name="societe_ref_cont" id="societe_ref_cont_update" value="<?= $dataMaj['0']['societe_ref_cont'] ?>">
-                </div>
-                <button class="btn btn-outline-light btn-block mb-2" type="submit" name="update10">Mettre à jour</button>
             </div>
-        </form>
-        <form action="controller/ctrlmajdoc.php" method="post">
-            <input type="hidden" name="societe_ref_prosp" value="<?= $_GET['societe_ref_prosp'] ?>">
-            <div class="form-row">
-                <div class="form-group mb-2">
-                    <label for="">Date de signature prévu des satuts : </label>
-                    <input type="date" class="form-control" name="sign_date" >
-                </div>
-                <button class="btn btn-outline-light btn-block mb-2" type="submit" name="update11">Mettre à jour</button>
-            </div>
-        </form>
-        <form action="controller/ctrlmajdoc.php" method="post">
-            <input type="hidden" name="societe_ref_prosp" value="<?= $_GET['societe_ref_prosp'] ?>">
-            <div class="input-group mb-2">
-                <select class="custom-select" id="inputGroupSelect02" name="status_id">
-                    <option selected>Selectionner un status</option>
-                    <option value="1">Prospet</option>
-                    <option value="2">Actif</option>
-                    <option value="3">Archivé</option>
-                    <option value="4">en contentieux</option>
-                </select>
-            </div>
-            <button class="btn btn-block btn-outline-light" type="submit" name="update1">Mettre à jour</button>
-        </form>
+        </div>        
     </div>
 </section>
 
@@ -77,7 +91,7 @@ $datahisto = $reqhisto->fetchAll();
 <section class='mb-4'>
     <div class="container">
         <h3 class="text-center mb-2">Editer un document</h3>
-        <button type="button" class="btn btn-block btn-primary " data-toggle="modal" data-target="#editFiles">Editer un document</button>
+        <button type="button" class="btn btn-block  " style="background-color:#13a8d9" data-toggle="modal" data-target="#editFiles">Editer un document</button>
     </div>
     <!-- Modal éditer un document -->
 <div class="modal fade" id="editFiles" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -127,7 +141,7 @@ $datahisto = $reqhisto->fetchAll();
                 </div>
                 <div class='modal-footer'>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                    <input type="submit" value="confirmer" class="btn btn-primary" id="btnedit"onClick="window.location.reload();">
+                    <input type="submit" value="confirmer" class="btn " style="background-color:#13a8d9" id="btnedit"onClick="window.location.reload();">
                 </div>
             </form>
         </div>
@@ -153,14 +167,14 @@ $datahisto = $reqhisto->fetchAll();
                         <td><?= $doc['doctype_name'] ?></td>
                         <td><?= DateFormat($doc['upload_datetime']) ?></td>
                         <td><?= $doc['upload_doc_name'] ?></td>
-                        <td><a href="upload/<?= $doc['societe_ref_prosp'] . '/' . $doc['upload_doc_name'] ?>" class="btn btn-success">Afficher</a></td>
+                        <td><a href="upload/<?= $doc['societe_ref_prosp'] . '/' . $doc['upload_doc_name'] ?>" class="btn btn-outline" style="background-color:#0C8384">Afficher</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
         <div class="form-row mb-2 ">
 
-            <button type="button" data-toggle="modal" data-target="#UploadFiles" class="btn btn-primary btn-block" >Ajouter des fichiers</button>
+            <button type="button" data-toggle="modal" data-target="#UploadFiles" class="btn btn-primary btn-block" style="background-color:#13a8d9" >Ajouter des fichiers</button>
         </div>
     </div>
 </section>
@@ -191,7 +205,7 @@ $datahisto = $reqhisto->fetchAll();
                 </div>
                 <div class='modal-footer'>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                    <input type="submit" value="confirmer" class="btn btn-primary">
+                    <input type="submit" value="confirmer" class="btn "style="background-color:#13a8d9">
                 </div>
             </form>
         </div>
@@ -247,11 +261,12 @@ $datahisto = $reqhisto->fetchAll();
             <label for="comments">Commentaire :</label>
             <textarea class="form-control" name="comments" id="comments" cols="30" rows="3"></textarea>
         </div>
-        <input type="submit" class='btn btn-block btn-outline-light' id="update2" value="Mettre à jour">
+        <input type="submit" class='btn btn-block 'style="background-color:#13a8d9" id="update2" value="Mettre à jour">
     </form>
 </section>
 
 <!-- ici identification des prestation qui vont être vendu -->
+<!-- faire une boucle foreach  et mettre un col md-3  -->
 <section class='mb-4'>
     <div class="container">
         <h3 class="h3 text-center">Prestation délivrée</h3>
@@ -321,7 +336,7 @@ $datahisto = $reqhisto->fetchAll();
                 </div>
             </div> -->
     </div>
-    <button type="submit" class='btn btn-block btn-outline-light' name="update3">Mettre à jour</button>
+    <button type="submit" class='btn btn-block ' style="background-color:#13a8d9" name="update3">Mettre à jour</button>
     </form>
     </div>
 </section>
@@ -392,7 +407,7 @@ $datahisto = $reqhisto->fetchAll();
                     <input class="form-control " type="text" name="customer_nationality" id="customer_nationality_update" value="<?= $dataMaj['0']['customer_nationality'] ?>">
                 </div>
             </div>
-            <button class="btn btn-block btn-outline-light" type="submit" name="update4">Mettre à jour</button>
+            <button class="btn btn-block " style="background-color:#13a8d9" type="submit" name="update4">Mettre à jour</button>
         </form>
     </div>
 </section>
@@ -451,7 +466,7 @@ $datahisto = $reqhisto->fetchAll();
                     <input class="form-control" type="text" name="code_ape" id="code_ape_update" value="<?= $dataMaj[0]['code_ape'] ?>">
                 </div>
             </div>
-            <button class="btn btn-block btn-outline-light" type="submit" name="update5">Mettre à jour</button>
+            <button class="btn btn-block " style="background-color:#13a8d9" type="submit" name="update5">Mettre à jour</button>
         </form>
     </div>
 </section>
@@ -548,7 +563,7 @@ $datahisto = $reqhisto->fetchAll();
     </div>
 </section>
 <!-- ici on renseigne les différents éléments de gestion -->
-<section class='mb-4'>
+<!-- <section class='mb-4'>
     <div class="container">
         <h3 class="h3 text-center">Information diverse</h3>
         <form action="controller/ctrlmajdoc.php" method="post">
@@ -569,7 +584,7 @@ $datahisto = $reqhisto->fetchAll();
     </div>
     </form>
     </div>
-</section>
+</section> -->
 <!-- gestion de la domiciliation -->
 <section class='mb-4'>
     <div class="container">
@@ -590,7 +605,7 @@ $datahisto = $reqhisto->fetchAll();
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-block btn-outline-light" name="update7">Mettre à jour</button>
+            <button type="submit" class="btn btn-block " style="background-color:#13a8d9" name="update7">Mettre à jour</button>
         </form>
     </div>
 </section>
