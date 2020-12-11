@@ -6,7 +6,7 @@ require 'connectbdd.php';
 include 'function.php';
 require_once  __DIR__.'../../vendor/autoload.php';
 
-var_dump($_POST);
+//var_dump($_POST);
 // die();
 $reqeditdoc=$bdd->prepare("SELECT * FROM societe INNER JOIN customer ON (customer.societe_ref_prosp=societe.societe_ref_prosp) LEFT JOIN associates ON (associates.societe_ref_prosp =societe.societe_ref_prosp )   WHERE societe.societe_ref_prosp= ?");
 $reqeditdoc->execute(array($_POST['societe_ref_prosp']));

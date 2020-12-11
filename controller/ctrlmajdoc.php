@@ -24,7 +24,7 @@ if(isset($_POST['update11'])){ $req1= $bdd->prepare("UPDATE societe SET  sign_da
 }
     
 if(isset($_POST['update1'])){
-    var_dump($_POST);
+    //var_dump($_POST);
     $req1= $bdd->prepare("UPDATE societe SET  status_id = ? WHERE societe_ref_prosp= ? ");
     $req1->execute(array(
         intval($_POST['status_id']),
@@ -60,7 +60,7 @@ $reqhistory->execute(array(
 }
 // update des prestations
 if(isset($_POST['update3'])){
-    var_dump($_POST);
+    //var_dump($_POST);
     foreach($_POST['presta_id'] as $presta){
     $req3 = $bdd->prepare("INSERT INTO history(societe_ref_prosp, presta_id) VALUES(?,?) ");
     $req3->execute(array(
@@ -72,7 +72,7 @@ if(isset($_POST['update3'])){
 }
 // MAJ des données du dirigeant (adresse, mail ,phone)
 if(isset($_POST['update4'])){
-    var_dump($_POST);
+    //var_dump($_POST);
     $req4=$bdd->prepare("UPDATE customer SET customer_email=?, customer_phone=?, customer_address=?, customer_zip_code=? , customer_city= ? WHERE  customer_id =?");
     $req4->execute(array(
         htmlspecialchars($_POST['customer_email']),
@@ -87,7 +87,7 @@ if(isset($_POST['update4'])){
 }
 // Mise a jour des infos de la société (Adresse, activité, siret ....)
 if(isset($_POST['update5'])){
-    var_dump($_POST);
+    //var_dump($_POST);
     $req5=$bdd->prepare('UPDATE societe SET societe_activity=:societe_activity, societe_address=:societe_address , societe_zip_code=:societe_zip_code, societe_city=:societe_city, societe_immat=:societe_immat,tva_number=:tva_number, code_ape=:code_ape,rcs_city= :rcs_city WHERE societe_ref_prosp = :societe_ref_prosp');
     $req5->bindValue(':societe_activity',$_POST['societe_activity']);
     $req5->bindValue(':societe_address',$_POST['societe_address']);
@@ -114,7 +114,7 @@ if(isset($_POST['update5'])){
 }
 // MAJ des données bancaires
 if(isset($_POST['update6'])){
-    var_dump($_POST);
+   // var_dump($_POST);
     $req6=$bdd->prepare("UPDATE societe SET bank =?, bank_address = ? , iban = ? WHERE societe_ref_prosp = ?");
     $req6->execute(array(
         htmlspecialchars($_POST['bank']),

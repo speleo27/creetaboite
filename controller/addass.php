@@ -102,7 +102,7 @@ if(isset($_POST)){
     $reqCreateAss=$bdd->prepare('INSERT INTO customer(societe_ref_prosp, cust_status, customer_civility, customer_fullname, customer_firstname, customer_email, customer_phone, customer_address, customer_zip_code, customer_city, customer_birthday, customer_place_of_birth, customer_nationality)
     VALUES(:societe_ref_prosp, :cust_status,:customer_civility ,:customer_fullname, :customer_firstname, :customer_email, :customer_phone, :customer_address, :customer_zip_code, :customer_city, :customer_birthday, :customer_place_of_birth, :customer_nationality)');
     $reqCreateAss->execute(array( 
-        'societe_ref_prosp'=> $_SESSION['auth']['societe_ref_prosp'],
+        'societe_ref_prosp'=> htmlspecialchars($_SESSION['auth']['societe_ref_prosp']),
         'cust_status'=>intval($_POST['cust_status']),
         'customer_civility'=>htmlspecialchars($_POST['civility']),
         'customer_fullname' =>htmlspecialchars($_POST['customer_full_nameAss']), 
@@ -112,7 +112,7 @@ if(isset($_POST)){
         'customer_address' =>htmlspecialchars($_POST['customer_addressAss']), 
         'customer_zip_code' =>intval($_POST['customer_zipAss']), 
         'customer_city' =>htmlspecialchars($_POST['customer_cityAss']), 
-        'customer_birthday' =>($_POST['customer_birthdayAss']), 
+        'customer_birthday' =>htmlspecialchars($_POST['customer_birthdayAss']), 
         'customer_place_of_birth' =>htmlspecialchars($_POST['customer_place_of_birthAss']), 
         'customer_nationality' =>htmlspecialchars($_POST['customer_nationalityAss'])  
     ));
@@ -124,8 +124,8 @@ foreach($docarray as $doc){
     
     $reqinsdoc=$bdd->prepare("INSERT INTO upload(societe_ref_prosp, upload_doc_name, upload_doctype_id) VALUES (:societe_ref_prosp, :upload_doc_name, :upload_doctype_id)"); 
     $reqinsdoc->execute(array(
-        "societe_ref_prosp"=> $_SESSION['auth']['societe_ref_prosp'], 
-        "upload_doc_name"=>$doc['name'], 
+        "societe_ref_prosp"=> htmlspecialchars($_SESSION['auth']['societe_ref_prosp']), 
+        "upload_doc_name"=>htmlspecialchars($doc['name']), 
         "upload_doctype_id"=>$doc['type']
 
     ));
