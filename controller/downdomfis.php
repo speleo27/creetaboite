@@ -1,7 +1,7 @@
 <?php
 require_once  __DIR__.'../../vendor/autoload.php';
 require 'connectbdd.php';
-$logo="./img/logo_creer_ta_boite2.png";
+$logo="../img/logo_creer_ta_boite2.png";
 
 
 $reqDomFisc =$bdd->prepare("SELECT * FROM societe INNER JOIN customer ON (societe.societe_ref_prosp = customer.societe_ref_prosp) WHERE societe.domiciliation ='fiscale' AND  (customer.cust_status =1 or  customer.cust_status =2)");

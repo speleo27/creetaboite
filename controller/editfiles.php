@@ -415,11 +415,11 @@ case 5:
     'margin_header' => 3,
     'margin_footer' => 3,]);
     
-    $mpdf->SetHTMLHeader('<p><img src="../img/Logo-Euripole.png" style="max-width:4.5cm; position:fixed-top-left; margin-top: 10px; margin-left: -50px;"></p>','O');
+    $mpdf->SetHTMLHeader('<p><img src="../img/logo_creer_ta_boite2.svg" style="max-width:4.5cm; position:fixed-top-left; margin-top: 10px; margin-left: -50px;"></p>','O');
          $mpdf->SetHTMLFooter('<table width="100%" style="border-top:2.5px solid #759672">
                                 <tr >
                                     <td width="20%" style=" font-size:0.2em;"><barcode size="0.8" code="'.sprintf('%011d',$time).'" type="UPCA"   class="barcode" /></td>
-                                    <td width="60%" align="center" style="font-size:0.8em;text-align:center; color:#759672; padding-top: 10px">EURIPOLE Business Center <br>17 Rue  Sancey - ZA des Vauguillettes III - 89100 SENS <br>Tél. +33.(0)3.86.88.30.61 SIRET 844 641 449 000 13 Code NAF/APE 6820B <br>Courriel : euripole@orange.fr – Site internet : www.euripole.fr</td>
+                                    <td width="60%" align="center" style="font-size:0.8em;text-align:center; color:#759672; padding-top: 10px"></td>
                                     <td width="20%" style="text-align: right; font-size:0.8em;">{PAGENO}/{nbpg}</td>
                                 </tr>
                                 </table>');
@@ -493,115 +493,7 @@ case 6:
 break;
 
 case 7:
-         /// contrat bureau partager
-         // la requete necessaire pour le document
-         $reqloc=$bdd->prepare("SELECT * FROM societe INNER JOIN customer ON(customer.societe_ref_prosp = societe.societe_ref_prosp) LEFT JOIN local on (local.ref_int_local = societe.ref_int_local) LEFT JOIN lease_term on(lease_term.lease_term_id = societe.lease_term_id)  WHERE societe.societe_ref_prosp=?");
-         $reqloc->execute(array($_POST['societe_ref_prosp']));
-         $loc=$reqloc->fetch();
-         //appel du document 
-        $file=file_get_contents("../pdf/matrice/contrat_bureau_partager.html");
-         //remplacement des données
-         $file=str_replace("{{{RAISON_SOCIALE}}}",strtoupper($loc['societe_name']),$file);
-         $file=str_replace("{{{Adresse_si&egrave;ge_social}}}",$loc['societe_address']." ".$loc['societe_zip_code']." ".strtoupper($loc['societe_city']),$file);
-         $file=str_replace("{{{Ville_RCS}}}",strtoupper($loc['rcs_city']),$file);
-         $file=str_replace("{{{Immatriculation}}}",$loc['societe_immat'],$file);
-         $file=str_replace("{{{Activit&eacute;e}}}",ucfirst($loc['societe_activity']),$file);
-         $file=str_replace("{{{Nom_du_G&eacute;rant}}}",ucfirst($loc['customer_fullname']),$file);
-         $file=str_replace("{{{Pr&eacute;nom_du_G&eacute;rant}}}",ucfirst($loc['customer_firstname']),$file);
-         $file=str_replace("{{{Adresse}}}",$loc['customer_address'],$file);
-         $file=str_replace("{{{Commune}}}",strtoupper($loc['customer_city']),$file);
-         $file=str_replace("{{{CODE}}}",$loc['customer_zip_code'],$file);
-         $file=str_replace("{{{Date_dentr&eacute;e}}}",DateFormat($loc['date_entrance']),$file);
-         $file=str_replace("{{{Date_de_fin}}}",DateFormat($loc['date_end']),$file);
-         $file=str_replace("{{{R&eacute;f_local}}}",$loc['ref_int_local'],$file);
-         $file=str_replace("{{{Superficie}}}",intval($loc['supercifie']),$file);
-         $file=str_replace("{{{Surface_pond&eacute;r&eacute;e}}}",$loc['surface_weighted'],$file);
-         $file=str_replace("{{{Loyer_mensuel_HT}}}",$loc['mensual_rent_ht'],$file);
-         $file=str_replace("{{{TAXE_FONCIERE}}}",$loc['property_tax'],$file);
-         $file=str_replace("{{{CHARGES}}}",$loc['charge'],$file);
-         $file=str_replace("{{{Prorata_de_loyer}}}",$loc['prorated_rent'],$file);
-         $file=str_replace("{{{Date_}}}",DateFormat(date("Y-m-d H:i:s")),$file);
-         $file=str_replace("{{{D&eacute;p&ocirc;t_de_garantie}}}",$loc['security_deposit'],$file);
         
-        $mpdf=new Mpdf\Mpdf([' mode'=> 'utf8', 
-        'format'=> 'A4',
-        'margin_left' => 15,
-        'margin_right' => 15,
-        'margin_top' => 30,
-        'margin_bottom' => 30,
-        'margin_header' => 3,
-        'margin_footer' => 3,]);
-
-        $mpdf->SetHTMLHeader('<p><img src="../img/Logo-Euripole.png" style="max-width:4.5cm; position:fixed-top-left; margin-top: 10px; margin-left: -50px;"></p>','O');
-        $mpdf->SetHTMLFooter('<table width="100%" style="border-top:2.5px solid #759672">
-                               <tr >
-                                   <td width="20%" style=" font-size:0.2em;"><barcode size="0.8" code="'.sprintf('%011d',$time).'" type="UPCA"   class="barcode" /></td>
-                                   <td width="60%" align="center" style="font-size:0.8em;text-align:center; color:#759672; padding-top: 10px">EURIPOLE Business Center <br>17 Rue  Sancey - ZA des Vauguillettes III - 89100 SENS <br>Tél. +33.(0)3.86.88.30.61 SIRET 844 641 449 000 13 Code NAF/APE 6820B <br>Courriel : euripole@orange.fr – Site internet : www.euripole.fr</td>
-                                   <td width="20%" style="text-align: right; font-size:0.8em;">{PAGENO}/{nbpg}</td>
-                               </tr>
-                               </table>');
-        $mpdf->WriteHTML($file);
-        
-        $mpdf->Output("../upload/".$_POST['societe_ref_prosp']."/contrat-bureau-part".$_POST['societe_ref_prosp']."_".$time.".pdf",\Mpdf\Output\Destination::FILE);
-        $mpdf->Output("../upload/".$_POST['societe_ref_prosp']."/contrat-bureau-part".$_POST['societe_ref_prosp']."_".$time.".pdf",\Mpdf\Output\Destination::DOWNLOAD);
-        $name="contrat-bureau-part".$_POST['societe_ref_prosp']."_".$time.".pdf";
-        $req=$bdd->prepare("INSERT INTO upload(societe_ref_prosp,upload_doc_name,upload_doctype_id) VALUES (?,?,?)");
-        $req->execute(array($_POST['societe_ref_prosp'],$name,16));
-break;
-
-case 8:
-        /// contrat dom
-         // la requete necessaire pour le document
-         $reqloc=$bdd->prepare("SELECT * FROM societe INNER JOIN customer ON(customer.societe_ref_prosp = societe.societe_ref_prosp) LEFT JOIN local on (local.ref_int_local = societe.ref_int_local) LEFT JOIN lease_term on(lease_term.lease_term_id = societe.lease_term_id)  WHERE societe.societe_ref_prosp=?");
-         $reqloc->execute(array($_POST['societe_ref_prosp']));
-         $loc=$reqloc->fetch();
-        // la requete necessaire pour le document
-        $file=file_get_contents("../pdf/matrice/contrat_dom.html");
-
-        //remplacement des données
-        $file=str_replace("{{{RAISON_SOCIALE}}}",strtoupper($loc['societe_name']),$file);
-        $file=str_replace("{{{Adresse_si&egrave;ge_social}}}",$loc['societe_address']." ".$loc['societe_zip_code']." ".strtoupper($loc['societe_city']),$file);
-        $file=str_replace("{{{Ville_RCS}}}",strtoupper($loc['rcs_city']),$file);
-        $file=str_replace("{{{Immatriculation}}}",$loc['societe_immat'],$file);
-        $file=str_replace("{{{Activit&eacute;}}}",ucfirst($loc['societe_activity']),$file);
-        $file=str_replace("{{{Nom_du_G&eacute;rant}}}",ucfirst($loc['customer_fullname']),$file);
-        $file=str_replace("{{{Pr&eacute;nom_du_G&eacute;rant}}}",ucfirst($loc['customer_firstname']),$file);
-        $file=str_replace("{{{Adresse}}}",$loc['customer_address'],$file);
-        $file=str_replace("{{{Commune}}}",strtoupper($loc['customer_city']),$file);
-        $file=str_replace("{{{CODE}}}",$loc['customer_zip_code'],$file);
-        $file=str_replace("{{{Date_}}}",DateFormat(date("Y-m-d H:i:s")),$file);
-        $mpdf=new Mpdf\Mpdf([' mode'=> 'utf8', 
-        'format'=> 'A4',
-        'margin_left' => 15,
-        'margin_right' => 15,
-        'margin_top' => 30,
-        'margin_bottom' => 30,
-        'margin_header' => 3,
-        'margin_footer' => 3,]);
-
-        $mpdf->SetHTMLHeader('<p><img src="../img/Logo-Euripole.png" style="max-width:4.5cm; position:fixed-top-left; margin-top: 10px; margin-left: -50px;"></p>','O');
-        $mpdf->SetHTMLFooter('<table width="100%" style="border-top:2.5px solid #759672">
-                                <tr >
-                                    <td width="20%" style=" font-size:0.2em;"><barcode size="0.8" code="'.sprintf('%011d',$time).'" type="UPCA"   class="barcode" /></td>
-                                    <td width="60%" align="center" style="font-size:0.8em;text-align:center; color:#759672; padding-top: 10px">EURIPOLE Business Center <br>17 Rue  Sancey - ZA des Vauguillettes III - 89100 SENS <br>Tél. +33.(0)3.86.88.30.61 SIRET 844 641 449 000 13 Code NAF/APE 6820B <br>Courriel : euripole@orange.fr – Site internet : www.euripole.fr</td>
-                                    <td width="20%" style="text-align: right; font-size:0.8em;">{PAGENO}/{nbpg}</td>
-                                </tr>
-                                </table>');
-        
-        $mpdf->WriteHTML($file);
-        
-        $mpdf->Output("../upload/".$_POST['societe_ref_prosp']."/contrat-dom".$_POST['societe_ref_prosp']."_".$time.".pdf",\Mpdf\Output\Destination::FILE);
-        $mpdf->Output("../upload/".$_POST['societe_ref_prosp']."/contrat-dom".$_POST['societe_ref_prosp']."_".$time.".pdf",\Mpdf\Output\Destination::DOWNLOAD);
-        $name="contrat-dom".$_POST['societe_ref_prosp']."_".$time.".pdf";
-        $req=$bdd->prepare("INSERT INTO upload(societe_ref_prosp,upload_doc_name,upload_doctype_id) VALUES (?,?,?)");
-        $req->execute(array($_POST['societe_ref_prosp'],$name,17));
-break;
-
-case 9:
-   
-
-case 10:
-
 
 default : 
 header("Location:../mise-a-jour-du-dossier-".$datas['societe_ref_prosp']);
