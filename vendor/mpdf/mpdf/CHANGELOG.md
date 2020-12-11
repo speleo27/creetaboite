@@ -23,6 +23,7 @@ mPDF 8.0.x
 * Fixed CMYK colors in text-shadow (#1115, @lexilya)
 * Skip non supported wrappers when resolving paths (#1204, @MarkVaughn)
 * Fixed SVGs using a style tag, has styles ignored ( Requires ext-dom ) (#450, @antman3351)
+* Allows `{nb}`, `{nbpg}`, `{PAGENO}` and `{DATE ...}` substitution in body (#172 and #267, @Dasc3er)
 
 mPDF 8.0.0
 ===========================
@@ -627,7 +628,7 @@ Textcircle/Circular
 - `<textcircle r="30mm" top-text="Text Circular Text Circular" bottom-text="Text Circular Text Circular"
     divider="&nbsp;&bull;&nbsp;" style="font-size: auto" />`
 
-}}} &rsquo; &sbquo; &bdquo; are now included in "orphan"-management at the end of lines
+&raquo; &rsquo; &sbquo; &bdquo; are now included in "orphan"-management at the end of lines
 
 Improved CJK line wrapping (if CJK character at end of line, breaks there rather than previous wordspace)
 
