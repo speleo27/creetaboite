@@ -135,12 +135,12 @@ h4 {
   color: black;
 }
 
-#listCusto > tr > td {
-  background-color: #FFFFFB;
-}
-
 h1 {
   color: #FFFFFB;
+}
+
+.table {
+  background-color: #FFFFFB;
 }
 
 /*# sourceMappingURL=app.css.map */

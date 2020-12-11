@@ -22,7 +22,7 @@ require_once 'template/header.php';
         <!-- Content Row -->
         <div class="row col-12">
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- suivi clients -->
             <div class=" col-4 col-sm-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class='card-header'>
@@ -41,7 +41,7 @@ require_once 'template/header.php';
                 </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- suivi types de créations -->
             <div class=" col-4 col-sm-6 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-header">
@@ -61,7 +61,7 @@ require_once 'template/header.php';
         </div>
         <div class="row col-12 align-items-center">
             <div class="col-3"></div>
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- prestations -->
             <div class=" col-4 col-sm-6 mb-4">
                 <div class="card border-left-info shadow h-100 py-2">
                     <div class="card-header">
@@ -138,7 +138,7 @@ require_once 'template/header.php';
 
                             </tbody>
                         </table>
-                        <a href="controller/downdomfis.php" class="btn btn-block" style="background-color:#0C8384">Télécharger le document</a>
+                        <!-- <a href="controller/downdomfis.php" class="btn btn-block mt-2" style="background-color:#0C8384">Télécharger le document</a> -->
                     </div>
                 </div>
             </div>
@@ -163,10 +163,7 @@ require_once 'template/header.php';
 <?php
 require_once 'template/footer.php';
 ?>
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+
 <script>
     $(document).ready(function() {
         $.ajax({

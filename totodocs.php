@@ -137,7 +137,7 @@ $array['link'] = "MTAwLS0kMnkkMTAkUHY3V0FKUy9CNUphNnlPMGZMQ2dHdS5LN00zeU1NemM0S2
         }
     }
 } );
-    $(input[type=search]).css("background","#ececec");
+
      
    
      
