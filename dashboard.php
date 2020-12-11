@@ -140,7 +140,7 @@ require_once 'template/header.php';
 
                             </tbody>
                         </table>
-                        <a href="controller/downdomfis.php" class="btn btn-block btn-outline-light">Télécharger le document</a>
+                        <a href="controller/downdomfis.php" class="btn btn-block" style="background-color:#0C8384">Télécharger le document</a>
                     </div>
                 </div>
             </div>

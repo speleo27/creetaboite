@@ -10,7 +10,7 @@ include 'controller/function.php';
 
 setlocale(LC_ALL, "fr_FR.utf-8");
 //var_dump($_GET);
-$reqmaj = $bdd->prepare('SELECT * FROM societe INNER JOIN customer ON (societe.societe_ref_prosp = customer.societe_ref_prosp) LEFT JOIN associates ON (customer.customer_id = associates.customer_id)     WHERE societe.societe_ref_prosp= ?  ');
+$reqmaj = $bdd->prepare('SELECT * FROM societe INNER JOIN customer ON (societe.societe_ref_prosp = customer.societe_ref_prosp) LEFT JOIN associates ON (customer.customer_id = associates.customer_id) LEFT JOIN status on(status.status_id= societe.status_id)     WHERE societe.societe_ref_prosp= ?  ');
 $reqmaj->execute(array($_GET['societe_ref_prosp']));
 $dataMaj = $reqmaj->fetchAll(PDO::FETCH_ASSOC);
 //var_dump($dataMaj);
