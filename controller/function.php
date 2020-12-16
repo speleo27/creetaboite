@@ -116,3 +116,52 @@ function getLatestMonth($month=null,$year=null){
     }
     return $months;
 }
+function sendContact($destinataire, $variable1, $variable2, $subject = "Sujet de ton email", $template = "../assets/emails/template-email.html"){
+
+    // GABARIT D'EMAIL
+    $emailContent = file_get_contents($template);
+    $emailContent = str_replace("{{variable1}}", $variable1, $emailContent);
+    $emailContent = str_replace("{{variable2}}", $variable2, $emailContent);
+
+    // ELEMENTS DU MESSAGE
+    $body = [
+    'Messages' => [
+        [
+            'From' => [
+                'Email' => "email@email.com",
+                "Name" => "Nom de l'émetteur"
+            ],
+            'To' => [
+                [
+                    'Email' => $destinataire
+                ]
+            ],
+            'Subject' => $subject,
+            'HTMLPart' => $emailContent
+        ]
+    ]
+    ];
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.mailjet.com/v3.1/send",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($body),
+            CURLOPT_HTTPHEADER => array(
+                    "Content-Type: application/json",
+                    "Authorization: Basic xxx_ARemplacerParCeQueTuAurasDansPostman_xxx"
+            ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    
+}
