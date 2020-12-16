@@ -1,4 +1,4 @@
-
+Options -Indexes
 RewriteEngine on
 
 
@@ -12,6 +12,7 @@ RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule (.*) $1.php [L]
 
 RedirectMatch 403 ^/upload/([a-zA-Z0-9]+)/$
+
 
 RewriteRule ^tableau-de-bord$ dashboard.php [L]
 RewriteRule ^creation-de-prospect$ totoform.php [L]

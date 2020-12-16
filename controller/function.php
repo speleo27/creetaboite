@@ -116,7 +116,7 @@ function getLatestMonth($month=null,$year=null){
     }
     return $months;
 }
-function sendContact($destinataire, $variable1, $variable2, $subject = "Sujet de ton email", $template = "../assets/emails/template-email.html"){
+function sendContact($emetteur,$destinataire, $variable1, $variable2, $subject , $template = "templateMail.html"){
 
     // GABARIT D'EMAIL
     $emailContent = file_get_contents($template);
@@ -128,8 +128,8 @@ function sendContact($destinataire, $variable1, $variable2, $subject = "Sujet de
     'Messages' => [
         [
             'From' => [
-                'Email' => "email@email.com",
-                "Name" => "Nom de l'émetteur"
+                'Email' => $emetteur,
+                
             ],
             'To' => [
                 [
@@ -156,12 +156,12 @@ function sendContact($destinataire, $variable1, $variable2, $subject = "Sujet de
             CURLOPT_POSTFIELDS => json_encode($body),
             CURLOPT_HTTPHEADER => array(
                     "Content-Type: application/json",
-                    "Authorization: Basic xxx_ARemplacerParCeQueTuAurasDansPostman_xxx"
+            "Authorization: Basic ZWU4N2VjOWMwNjU1ZDE3ZjZlZTRiZWZmZGIyMTgzMWY6ZmIzNTc3OWZmMzhhZDBhOThiNWVjOWE3Njg3NzNmOWM="
             ),
     ));
 
     $response = curl_exec($curl);
 
     curl_close($curl);
-    
+    echo $response ;
 }
