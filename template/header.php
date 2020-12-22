@@ -1,6 +1,7 @@
 <?php
 setlocale(LC_ALL,"fr_FR");
 require_once 'controller/connectbdd.php';
+require 'controller/setting.php';
 // include 'controller/function.php';
 
 
@@ -29,12 +30,12 @@ require_once 'controller/connectbdd.php';
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
   
 
-    <title>Cree ta boite</title>
+    <title><?= $title ?></title>
 </head>
 
 <body>
 <nav class="navbar " id="usernavbar">
-    <a class="navbar-brand" href="accueil" id="brand">Crée ta boite</a>
+    <a class="navbar-brand" href="accueil" id="brand"><?= $title ?></a>
     <?php
     if(isset($_SESSION['auth'])) {
      
@@ -57,7 +58,7 @@ require_once 'controller/connectbdd.php';
 </nav>
 
 
-<p><img src="./img/logo_creer_ta_boite2.svg" alt="" srcset="" id="logo"></p>
+<p><img src="<?=$logo?>" alt="" srcset="" id="logo"></p>
 
 
 <!---- Modal ---->

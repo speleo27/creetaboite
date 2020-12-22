@@ -1,4 +1,5 @@
 <?php
+require '../setting.php';
 // les extension valides 
 $valid_extensions = array('jpeg', 'jpg', 'pdf', 'tiff');
 
@@ -116,7 +117,9 @@ function getLatestMonth($month=null,$year=null){
     }
     return $months;
 }
-function sendContact($emetteur,$destinataire, $variable1, $variable2, $subject , $template = "templateMail.html"){
+
+
+function sendContact($emetteur,$destinataire, $variable1, $variable2, $subject , $template = "templateMail.html",$keyId=KEY_ID,$keyScrt=KEY_SCRT){
 
     // GABARIT D'EMAIL
     $emailContent = file_get_contents($template);
@@ -156,7 +159,7 @@ function sendContact($emetteur,$destinataire, $variable1, $variable2, $subject ,
             CURLOPT_POSTFIELDS => json_encode($body),
             CURLOPT_HTTPHEADER => array(
                     "Content-Type: application/json",
-            "Authorization: Basic ZWU4N2VjOWMwNjU1ZDE3ZjZlZTRiZWZmZGIyMTgzMWY6ZmIzNTc3OWZmMzhhZDBhOThiNWVjOWE3Njg3NzNmOWM="
+            "Authorization: Basic ".base64_encode($keyId.':'.$keyScrt)
             ),
     ));
 

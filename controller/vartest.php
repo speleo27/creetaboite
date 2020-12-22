@@ -1,6 +1,7 @@
 <?php
 require 'connectbdd.php';
-require'function.php';
+require '../setting.php';
+require 'function.php';
 // creation de la requete pour aller chercher les info sur le dirigeant et ses codes de connection
 $reqsendmail = $bdd->prepare('SELECT * FROM customer INNER JOIN connect ON customer.societe_ref_prosp = connect.societe_ref_prosp WHERE customer.societe_ref_prosp=?');
 $reqsendmail->execute(array(
@@ -31,7 +32,7 @@ while ($data = $reqsendmail->fetch()) {
     $destinataire = $email;
     $variable1 = ucfirst($data['customer_fullname'])." ".ucfirst($data['customer_firstname']);
     $variable2= $linkHash;
-    $subject="Lien de connection Crée ta boite";
+    $subject="Lien de connection ".$title;
     sendContact($emetteur, $destinataire, $variable1, $variable2, $subject , $template = "templateMail.html");
 
   }

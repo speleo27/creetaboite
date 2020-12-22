@@ -1,6 +1,7 @@
 <?php
 
 require_once 'connectbdd.php';
+require '../setting.php';
 
 //var_dump($_GET);
 // creation de la requete pour aller chercher les info sur le dirigeant et ses codes de connection
@@ -28,10 +29,13 @@ if(isset($_POST)){
         
         'societe_ref_prosp'=>$_GET['societe_ref_prosp']
     ));
-
+    $variable1 = ucfirst($data['customer_fullname'])." ".ucfirst($data['customer_firstname']);
+    $variable2= $linkHash;
+    if($phpmail===true){
+        // version  mail php
        $headers[]='MIME-Version:1.0';
        $headers[]='Content-type: text/html; charset=utf-8';
-       $headers[]='From: ';
+       $headers[]='From: '.$emetteur;
     
          //$to = 'seb10400@orange.fr';
         $to = $email;
@@ -47,7 +51,7 @@ if(isset($_POST)){
         
             <div>
 
-                <h2>Bonjour '.ucfirst($data['customer_civility']).' '.ucfirst($data['customer_fullname']).'</h2>
+                <h2>Bonjour '.$variable1.'</h2>
                 <p>Vous recevez ce message car vous souhaitez créer votre entreprise et avez choisi de travailler avec Cree ta boite.</p>
                 <p>Pour commencer l\'aventure vous devez vous assurez d\'avoir en votre possession les documents suivant numérisés (au format PDF,JPG,TIFF):
                                 <ul>
@@ -58,7 +62,7 @@ if(isset($_POST)){
                                     <li>Relevé d\'identité bancaire</li>
                                 </ul>
                 </p>
-                <p>Afin de pouvoir poursuivre vos nous vous invitons a vous connecter a l\'adresse suivante:<a href="creetaboite/begin.php?key='.$linkHash.'"> Cree ta boite</a> en vous munissant des informations suivante</p>
+                <p>Afin de pouvoir poursuivre vos nous vous invitons a vous connecter a l\'adresse suivante:<a href="creetaboite/begin.php?key='.$variable2.'"> Cree ta boite</a> en vous munissant des informations suivante</p>
                   
             </div>
         </body>
@@ -67,7 +71,11 @@ if(isset($_POST)){
 
 
     mail($to,$subject,$message,implode("\r\n",$headers));
-
+    }else{
+    //version mailJet
+    $subject="Lien de connection ".$title;
+    sendContact($emetteur, $destinataire, $variable1, $variable2, $subject , $template = "templateMail.html");
+    }
 
 }
 
