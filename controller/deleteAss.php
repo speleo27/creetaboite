@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require '../setting.php';
 require_once 'connectbdd.php';
 
  var_dump($_GET);

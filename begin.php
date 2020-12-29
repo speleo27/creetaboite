@@ -1,4 +1,5 @@
 <?php
+require 'setting.php';
 require 'controller/connectbdd.php';
 //var_dump($_GET);
 $arraylink=array();

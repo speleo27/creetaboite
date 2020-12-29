@@ -1,6 +1,6 @@
 <?php
 
-
+require '../setting.php';
 require_once 'connectbdd.php';
 var_dump($_POST);
 // création du n° de prospect

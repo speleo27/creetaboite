@@ -1,5 +1,5 @@
 <?php
-require '../setting.php';
+
 // les extension valides 
 $valid_extensions = array('jpeg', 'jpg', 'pdf', 'tiff');
 
@@ -119,12 +119,13 @@ function getLatestMonth($month=null,$year=null){
 }
 
 
-function sendContact($emetteur,$destinataire, $variable1, $variable2, $subject , $template = "templateMail.html",$keyId=KEY_ID,$keyScrt=KEY_SCRT){
+function sendContact($emetteur,$destinataire, $variable1, $variable2, $subject , $template = "templateMail.html",$keyId=KEY_ID,$keyScrt=KEY_SCRT, $url=ADDRESS){
 
     // GABARIT D'EMAIL
     $emailContent = file_get_contents($template);
     $emailContent = str_replace("{{variable1}}", $variable1, $emailContent);
     $emailContent = str_replace("{{variable2}}", $variable2, $emailContent);
+    $emailContent = str_replace("{{url}}", $url, $emailContent);
 
     // ELEMENTS DU MESSAGE
     $body = [

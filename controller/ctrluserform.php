@@ -1,5 +1,6 @@
 <?php
 session_start();
+require '../setting.php';
 require_once 'connectbdd.php';
 //ici prevoir les requete en update car déja creer par admin
 //var_dump($_POST);

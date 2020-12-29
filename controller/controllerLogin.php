@@ -3,10 +3,9 @@
 
 //var_dump($_POST);
 
-
 if(isset($_POST['connectbtn']))
 {
-
+    
     $email=filter_var($_POST['connect_email'],FILTER_VALIDATE_EMAIL);
     //$email='seb@orange.fr';
     //var_dump($email);
@@ -14,6 +13,7 @@ if(isset($_POST['connectbtn']))
         header('Location:../index.php');
         die();
     }
+        include '../setting.php';
         include ('connectbdd.php');
         $req=$bdd->prepare('SELECT * FROM connect WHERE connect_email=? LIMIT 1');
         $req->execute(array(

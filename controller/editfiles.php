@@ -2,6 +2,7 @@
 
 
 
+require '../setting.php';
 require 'connectbdd.php';
 include 'function.php';
 require_once  __DIR__.'../../vendor/autoload.php';
@@ -19,8 +20,7 @@ $reqdoc=$bdd->prepare("SELECT * FROM doc_generate");
 $reqdoc->execute();
 $datadoc= $reqdoc->fetchAll(PDO::FETCH_ASSOC);
 //var_dump($datadoc);
-$header='<p><img src="../img/Logo-Euripole.png" style="max-width:4.5cm"></p>';
-$footer='<div style="position: absolute; bottom:40px; left:0px"><hr style="color:#759672; border:10px #759672 solid "><p  style=" font-size:0.8em;text-align:center; color:#759672 ">EURIPOLE Business Center 17 Rue  Sancey - ZA des Vauguillettes III - 89100 SENS Tél. +33.(0)3.86.88.30.61 SIRET 844 641 449 000 13 Code NAF/APE 6820B Courriel : euripole@orange.fr – Site internet : www.euripole.fr</p></div>';
+
 
 
 
@@ -58,11 +58,11 @@ switch($_POST['doc_id']){
     'margin_header' => 3,
     'margin_footer' => 3,]);
     
-    $mpdf->SetHTMLHeader('<p><img src="../img/Logo-Euripole.png" style="max-width:4.5cm; position:fixed-top-left; margin-top: 10px; margin-left: -50px;"></p>','O');
+    $mpdf->SetHTMLHeader('<p><img src="'.$logo.'" style="max-width:4.5cm; position:fixed-top-left; margin-top: 10px; margin-left: -50px;"></p>','O');
          $mpdf->SetHTMLFooter('<table width="100%" style="border-top:2.5px solid #759672">
                                 <tr >
                                     <td width="20%" style=" font-size:0.2em;"><barcode size="0.8" code="'.sprintf('%011d',$time).'" type="UPCA"   class="barcode" /></td>
-                                    <td width="60%" align="center" style="font-size:0.8em;text-align:center; color:#759672; padding-top: 10px">EURIPOLE Business Center <br>17 Rue  Sancey - ZA des Vauguillettes III - 89100 SENS <br>Tél. +33.(0)3.86.88.30.61 SIRET 844 641 449 000 13 Code NAF/APE 6820B <br>Courriel : euripole@orange.fr – Site internet : www.euripole.fr</td>
+                                    <td width="60%" align="center" style="font-size:0.8em;text-align:center; color:#759672; padding-top: 10px">'.$nameboite.'</td>
                                     <td width="20%" style="text-align: right; font-size:0.8em;">{PAGENO}/{nbpg}</td>
                                 </tr>
                                 </table>');
@@ -415,7 +415,7 @@ case 5:
     'margin_header' => 3,
     'margin_footer' => 3,]);
     
-    $mpdf->SetHTMLHeader('<p><img src="../img/logo_creer_ta_boite2.svg" style="max-width:4.5cm; position:fixed-top-left; margin-top: 10px; margin-left: -50px;"></p>','O');
+    $mpdf->SetHTMLHeader('<p><img src="'.$logo.'" style="max-width:4.5cm; position:fixed-top-left; margin-top: 10px; margin-left: -50px;"></p>','O');
          $mpdf->SetHTMLFooter('<table width="100%" style="border-top:2.5px solid #759672">
                                 <tr >
                                     <td width="20%" style=" font-size:0.2em;"><barcode size="0.8" code="'.sprintf('%011d',$time).'" type="UPCA"   class="barcode" /></td>
@@ -474,7 +474,7 @@ case 6:
             'margin_header' => 3,
             'margin_footer' => 3,]
          );
-         $mpdf->SetHTMLHeader('<p><img src="../img/logo_creer_ta_boite2.svg" style="max-width:4.5cm; position:fixed-top-left; margin-top: 10px; margin-left: -50px;"></p>','O');
+         $mpdf->SetHTMLHeader('<p><img src="'.$logo.'" style="max-width:4.5cm; position:fixed-top-left; margin-top: 10px; margin-left: -50px;"></p>','O');
          $mpdf->SetHTMLFooter('<table width="100%" style="border-top:2.5px solid #759672">
                                 <tr >
                                     <td width="20%" style=" font-size:0.2em;"><barcode size="0.8" code="'.sprintf('%011d',$time).'" type="UPCA"   class="barcode" /></td>

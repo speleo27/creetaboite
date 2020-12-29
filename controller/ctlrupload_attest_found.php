@@ -1,5 +1,5 @@
 <?php
-
+require '../setting.php';
 require_once 'connectbdd.php';
 
 if(empty($_FILES['attest_found-0'])) {

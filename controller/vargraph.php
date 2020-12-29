@@ -1,4 +1,5 @@
 <?php
+require '../setting.php';
 include 'connectbdd.php';
 require 'function.php';
 $graph1 = array(

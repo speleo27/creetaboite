@@ -5,7 +5,8 @@ session_destroy();
     header("Location:accueil");
 
 }
-require_once 'controller/connectbdd.php';
+
+
 require_once 'template/header.php';
 ?>
 

@@ -1,6 +1,7 @@
 <?php
 session_start();
-//var_dump($_POST);
+//var_dump($_POST);.
+require '../setting.php';
 require_once 'connectbdd.php';
 
 //var_dump($_SESSION);

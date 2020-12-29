@@ -1,5 +1,5 @@
 <?php
-
+require '../setting.php';
 require 'connectbdd.php';
 
 if(empty($_FILES['just_dom-0'])) {

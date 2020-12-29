@@ -1,4 +1,5 @@
 <?php
+require '../setting.php';
 require_once 'connectbdd.php';
 include 'function.php';
 

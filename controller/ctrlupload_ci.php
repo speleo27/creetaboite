@@ -1,5 +1,5 @@
 <?php
-
+require '../setting.php';
 require 'connectbdd.php';
 require 'function.php';
 

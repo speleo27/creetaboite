@@ -1,7 +1,8 @@
 <?php
 
-require_once 'connectbdd.php';
 require '../setting.php';
+require_once 'connectbdd.php';
+require 'function.php';
 
 //var_dump($_GET);
 // creation de la requete pour aller chercher les info sur le dirigeant et ses codes de connection
@@ -50,9 +51,9 @@ if(isset($_POST)){
         <body>
         
             <div>
-
+                <div><img src="'.$logo.'"></div>
                 <h2>Bonjour '.$variable1.'</h2>
-                <p>Vous recevez ce message car vous souhaitez créer votre entreprise et avez choisi de travailler avec Cree ta boite.</p>
+                <p>Vous recevez ce message car vous souhaitez créer votre entreprise et avez choisi de travailler avec '.$nameboite.'.</p>
                 <p>Pour commencer l\'aventure vous devez vous assurez d\'avoir en votre possession les documents suivant numérisés (au format PDF,JPG,TIFF):
                                 <ul>
                                     <li>Carte d\'identité, carte de séjour ou passport (recto-verso)</li>
@@ -62,7 +63,7 @@ if(isset($_POST)){
                                     <li>Relevé d\'identité bancaire</li>
                                 </ul>
                 </p>
-                <p>Afin de pouvoir poursuivre vos nous vous invitons a vous connecter a l\'adresse suivante:<a href="creetaboite/begin.php?key='.$variable2.'"> Cree ta boite</a> en vous munissant des informations suivante</p>
+                <p>Afin de pouvoir poursuivre vos nous vous invitons a vous connecter a l\'adresse suivante:<a href="'.$https.'/begin.php?key='.$variable2.'">'.$nameboite.'</a> en vous munissant des informations suivante</p>
                   
             </div>
         </body>

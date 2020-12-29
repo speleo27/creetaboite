@@ -1,6 +1,6 @@
 <?php
-require 'connectbdd.php';
 require '../setting.php';
+require 'connectbdd.php';
 require 'function.php';
 // creation de la requete pour aller chercher les info sur le dirigeant et ses codes de connection
 $reqsendmail = $bdd->prepare('SELECT * FROM customer INNER JOIN connect ON customer.societe_ref_prosp = connect.societe_ref_prosp WHERE customer.societe_ref_prosp=?');

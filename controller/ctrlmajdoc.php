@@ -1,5 +1,5 @@
 <?php
-
+require '../setting.php';
 require_once 'connectbdd.php';
 $toto=$_POST['societe_ref_prosp'];
 // var_dump($toto);

@@ -1,7 +1,7 @@
 <?php
 setlocale(LC_ALL,"fr_FR");
+require 'setting.php';
 require_once 'controller/connectbdd.php';
-require 'controller/setting.php';
 // include 'controller/function.php';
 
 
