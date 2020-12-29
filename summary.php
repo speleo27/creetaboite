@@ -8,6 +8,7 @@ session_destroy();
 
 require __DIR__.'/vendor/autoload.php';
 //require_once 'template/header.php';
+require 'setting.php';
 require_once 'controller/connectbdd.php';
 include 'controller/function.php';
 
