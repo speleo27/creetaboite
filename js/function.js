@@ -30,7 +30,7 @@ jQuery.each($('#'+ idFile)[0].files, function(i, file) {
         { 
              if(response!= '')
              {
-                 console.log(response);
+         //console.log(response);
         var fileName= response.split('/');
 
         $("#"+showname).html('<span>'+fileName[1]+'</span>');

@@ -446,6 +446,7 @@ $datas= $requpdatecusto->fetchAll();
             }
    
         });
+        
     });
 
     // gestion de la carte d'identité
@@ -457,8 +458,7 @@ $datas= $requpdatecusto->fetchAll();
         deleteUploadFile('showfile1','showname1','showbtn1','upload_ci','choice1');
     });
 
-    
-    
+        
 });
 
 

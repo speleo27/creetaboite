@@ -1,4 +1,5 @@
 <?php
+// lire le read  me  pour toutes les informations sur l'installation 
 //connection a la base de données en ligne
 $host = "localhost";
 $dbname = "cgsmxggl_creetaboite";
@@ -13,10 +14,13 @@ $password = "7EM]*gmqAbCY";
 
 //le titre du site
 $title = "Crée ta boite";
+
 // logo de votre societé
 $https= "https://creetaboite.sebastien-rossi-speleo27.fr";
 $logo=$https.'/img/logo_creer_ta_boite2.svg';
 $nameboite= "Crée ta boite";
+
+// traitement des données liées au cgu
 $property="Sebastien Rossi 4, rue du four 10400 Pont sur seine";
 $publi= 'Sebastien Rossi - sebastien.rossi@gretasudchampagne.com';
 $webmaster= 'Sebastien Rossi - sebastien.rossi@gretasudchampagne.com';
@@ -25,7 +29,7 @@ $dpo= 'Sebastien Rossi - sebastien.rossi@gretasudchampagne.com';
 
 
 
-
+// traitement de l'envoi de mail
 $phpmail=true;
 // si $phpmail est égale a false
 // donnée mail jet

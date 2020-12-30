@@ -64,6 +64,7 @@ function insertdoc($docname,$typedoc){
     
 }
 function addFiles($rename, $extAuthorized,$path,$societe,$doctype){
+    include 'setting.php';
     include 'connectbdd.php';
     $files = $_FILES['filesAdd']['tmp_name']; //ici pour le $_FILES on prend le nom et l'autre sert a etre sur et il passe par le secteur temporaire du serveur
     // var_dump($_FILES);
