@@ -38,7 +38,7 @@ switch($_POST['doc_id']){
     $file= str_replace("{{{Adresse_si&egrave;ge_social}}}",$datas['societe_address'],$file);
     $file= str_replace("{{{Code_SS}}}",$datas['societe_zip_code'],$file);
     $file= str_replace("{{{Commune_SS}}}",ucfirst($datas['societe_city']),$file);
-    $file= str_replace("{{{Ville_RCS}}}",$datas['rcs_city'],$file);
+    $file= str_replace("{{{Ville_RCS}}}",ucfirst($datas['rcs_city']),$file);
     $file= str_replace("{{{Immatriculation}}}",$datas['societe_immat'],$file);
     $file= str_replace("{{{Activit&eacute;}}}",$datas['societe_activity'],$file);
     $file= str_replace("{{{Civilit&eacute;}}}",$datas['customer_civility'],$file);

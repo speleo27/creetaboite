@@ -88,7 +88,8 @@ if(isset($_POST['update4'])){
 // Mise a jour des infos de la société (Adresse, activité, siret ....)
 if(isset($_POST['update5'])){
     //var_dump($_POST);
-    $req5=$bdd->prepare('UPDATE societe SET societe_activity=:societe_activity, societe_address=:societe_address , societe_zip_code=:societe_zip_code, societe_city=:societe_city, societe_immat=:societe_immat,tva_number=:tva_number, code_ape=:code_ape,rcs_city= :rcs_city WHERE societe_ref_prosp = :societe_ref_prosp');
+    $req5=$bdd->prepare('UPDATE societe SET societe_activity=:societe_activity, societe_address=:societe_address , societe_zip_code=:societe_zip_code,
+     societe_city=:societe_city, societe_immat=:societe_immat,tva_number=:tva_number, code_ape=:code_ape,rcs_city= :rcs_city WHERE societe_ref_prosp = :societe_ref_prosp');
     $req5->bindValue(':societe_activity',$_POST['societe_activity']);
     $req5->bindValue(':societe_address',$_POST['societe_address']);
     $req5->bindValue(':societe_zip_code',$_POST['societe_zip_code']);

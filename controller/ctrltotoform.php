@@ -2,7 +2,8 @@
 
 require '../setting.php';
 require_once 'connectbdd.php';
-var_dump($_POST);
+//var_dump($_POST);
+
 // création du n° de prospect
 $reqsociete=$bdd->prepare('INSERT INTO societe(societe_ref_prosp) VALUES(?)');
 $reqsociete->execute(array(
@@ -68,20 +69,6 @@ if($_POST['cust_status']==2){
     'customer_id'=>  $custId,
     ));
 }
-
-
-
-
-// //var_dump($reqsociete);
-
-
-
-
-//var_dump($reqcustomer);
-
-//var_dump($hashguizmo);
-//var_dump($reqconnect);
-
 
 
 // création du dossier de stockage liée au prospect

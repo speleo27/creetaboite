@@ -7,8 +7,7 @@ if(isset($_POST['connectbtn']))
 {
     
     $email=filter_var($_POST['connect_email'],FILTER_VALIDATE_EMAIL);
-    //$email='seb@orange.fr';
-    //var_dump($email);
+    
     if($email === false){
         header('Location:../index.php');
         die();
