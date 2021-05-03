@@ -34,7 +34,7 @@ require_once 'controller/connectbdd.php';
 </head>
 
 <body>
-<nav class="navbar " id="usernavbar">
+<nav class="navbar fixed-top " id="usernavbar">
     <a class="navbar-brand" href="accueil" id="brand"><?= $title ?></a>
     <?php
     if(isset($_SESSION['auth'])) {
@@ -45,16 +45,26 @@ require_once 'controller/connectbdd.php';
            
             <button class='btn btn-outline-light my-2 my-sm-0' type='button' data-toggle='modal' data-target='#disconnectModal'>Déconnexion</button>
             <?php } 
+        if($_SESSION['auth']["admin"]==1 && $_SERVER['SCRIPT_NAME']=="/totomaj.php"){
+            ?>
+            <div id="navupdate">
+                <a href='#editdoc' class='btn btn-outline-light mr-2'>editer un document</a>
+                <a href='creation-de-prospect' class='btn btn-outline-light mr-2'id='createNewCust'> Création nouveaux client</a>
+                <a href='gestion-des-dossiers' class='btn btn-outline-light mr-2'>Gestion de dossier</a>
+                <button class='btn btn-outline-light my-2 my-sm-0' type='button' data-toggle='modal' data-target='#disconnectModal'>Déconnexion</button>  
+            </div>
+        <?php }    
           else { ?>  
-               <a href='tableau-de-bord' class='btn btn-outline-light mr-2'>Tableau de bord</a>
-                        <a href='creation-de-prospect' class='btn btn-outline-light mr-2'id='createNewCust'> Création nouveaux client</a>
-                        <a href='gestion-des-dossiers' class='btn btn-outline-light mr-2'>Gestion de dossier</a>
-                        <button class='btn btn-outline-light my-2 my-sm-0' type='button' data-toggle='modal' data-target='#disconnectModal'>Déconnexion</button>  
+                <a href='tableau-de-bord' class='btn btn-outline-light mr-2'>Tableau de bord</a>
+                <a href='creation-de-prospect' class='btn btn-outline-light mr-2'id='createNewCust'> Création nouveaux client</a>
+                <a href='gestion-des-dossiers' class='btn btn-outline-light mr-2'>Gestion de dossier</a>
+                <button class='btn btn-outline-light my-2 my-sm-0' type='button' data-toggle='modal' data-target='#disconnectModal'>Déconnexion</button>  
              <?php
             }
-           } else { ?>  
-                   <a class="btn btn-outline-light my-2 my-sm-0"  data-toggle='modal' data-target='#connectModal' >Connexion</a>
-                   <?php } ?>          
+        
+    } else { ?>  
+        <a class="btn btn-outline-light my-2 my-sm-0"  data-toggle='modal' data-target='#connectModal' >Connexion</a>
+        <?php } ?>          
 </nav>
 
 

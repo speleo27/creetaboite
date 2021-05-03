@@ -30,7 +30,7 @@ $dpo= 'Sebastien Rossi - sebastien.rossi@gretasudchampagne.com';
 
 
 // traitement de l'envoi de mail
-$phpmail=true;
+$phpmail=false;
 // si $phpmail est égale a false
 // donnée mail jet
 // define("KEY_ID","votre clé id à coller");

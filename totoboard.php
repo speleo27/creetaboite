@@ -54,6 +54,7 @@ require_once 'template/header.php';
         </div>
     </div>
 </section>
+
 <!-- ici on affiche les domiciliations fiscale -->
 <section class="mb-4">
     <div class="container">

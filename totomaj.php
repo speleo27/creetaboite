@@ -22,8 +22,9 @@ $datahisto = $reqhisto->fetchAll();
 // die();
 //var_dump($_GET);
 //var_dump($dataMaj);
-
+//var_dump($_SERVER)
 ?>
+
 <!--  identification de la société MAJ du N° client et du status -->
 <section class='mb-4'>
     
@@ -90,7 +91,7 @@ $datahisto = $reqhisto->fetchAll();
 <!-- affichage de tout les documents stocké pour le dossier -->
 <section class='mb-4'>
     <div class="container">
-        <h3 class="text-center mb-2">Editer un document</h3>
+        <h3 class="text-center mb-2" id="editdoc">Editer un document</h3>
         <button type="button" class="btn btn-block  " style="background-color:#13a8d9" data-toggle="modal" data-target="#editFiles">Editer un document</button>
     </div>
     <!-- Modal éditer un document -->
