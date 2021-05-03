@@ -1,1 +1,12 @@
-<?php phpinfo(); ?>
+<?php phpinfo();
+include 'totodocs.php';
+
+
+
+
+
+
+
+
+
+?>
